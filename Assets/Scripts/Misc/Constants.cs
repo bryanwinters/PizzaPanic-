@@ -21,6 +21,7 @@ public static class Constants : object {
     public const string CONTROLS_HORIZONTAL = "Horizontal";
     public const string CONTROLS_VERTICAL = "Vertical";
     public const string CONTROLS_ACTION = "Action";
+    public const string CONTROLS_DASH = "Dash";
     public const string CONTROLS_DASH_RIGHT = "DashRight";
     public const string CONTROLS_DASH_LEFT = "DashLeft";
     public const string CONTROLS_CYCLE_RIGHT = "CycleRight";

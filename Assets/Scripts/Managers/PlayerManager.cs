@@ -23,7 +23,8 @@ public class PlayerManager : MonoBehaviour, IManager {
 
     public int NumberOfPlayers = 4;
 
-    private List<Player> _players = new List<Player>();
+    private List<Player> _activePlayers = new List<Player>();
+    private int _playersReady;
 
 	// Use this for initialization
 	void Start () 
@@ -38,7 +39,7 @@ public class PlayerManager : MonoBehaviour, IManager {
             Player p = Instantiate(PlayerPrefab) as Player;
             p.Init(i+1);
             p.HandController.SetToPosition(Constants.SPAWN_POSITION[i]);
-            _players.Add(p);
+            _activePlayers.Add(p);
         }
     }
 }
