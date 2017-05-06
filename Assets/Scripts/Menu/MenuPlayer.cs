@@ -25,7 +25,7 @@ public class MenuPlayer : MonoBehaviour {
 
     private void SetupVariables ()
     {
-        SetPlayerActive(false);
+        SetPlayerActive(false, true);
 
         _controlsSelect = Constants.CONTROLS_ACTION + PlayerNumber.ToString();
         _controlsReady = Constants.CONTROLS_DASH + PlayerNumber.ToString();
@@ -33,15 +33,19 @@ public class MenuPlayer : MonoBehaviour {
 
     private void Update()
     {
-        if (Input.GetButtonDown(_controlsSelect))
+        if (GameManager.Instance.GameState == Constants.GameState.menu)
         {
-            SetPlayerActive(!_isActive);
-        }
+            if (Input.GetButtonDown(_controlsSelect))
+            {
+                SetPlayerActive(!_isActive);
+            }
 
-        if (Input.GetAxis(_controlsReady) != 0 && _isActive == true)
-            _isReady = true;
-        else
-            _isReady = false;
+            if ((Input.GetAxis(_controlsReady) >= Constants.CONTROLLER_TRIGGER_DEAD_ZONE || 
+                Input.GetAxis(_controlsReady) <= -Constants.CONTROLLER_TRIGGER_DEAD_ZONE) && _isActive == true)
+                SetPlayerReady(true);
+            else
+                SetPlayerReady(false);
+        }
     }
 
     private void SendPlayerActiveEvent ()
@@ -59,13 +63,13 @@ public class MenuPlayer : MonoBehaviour {
         }
     }
 
-    private void SetPlayerActive (bool isActive)
+    private void SetPlayerActive (bool isActive, bool forceActive = false)
     {
-        if(isActive != _isActive)
+        if(isActive != _isActive || forceActive == true)
         {
             _isActive = isActive;
-            if (_isActive == false)
-                SetPlayerReady(false);
+
+            SendPlayerActiveEvent();
 
             float alpha = (_isActive == true) ? 1f : 0f;
             _readyImage.DOFade(alpha, 0f);
@@ -77,6 +81,7 @@ public class MenuPlayer : MonoBehaviour {
         if (isReady != _isReady)
         {
             _isReady = isReady;
+            SendPlayerReadyEvent();
         }
     }
 

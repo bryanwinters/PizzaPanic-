@@ -6,7 +6,9 @@ using UnityEngine;
 public class Player : MonoBehaviour {
 
     public Constants.Characters CharacterType;
-    public int PlayerNumber = 1;
+
+    [SerializeField] private int _playerNumber = 1;
+    public int PlayerNumber { get { return _playerNumber; } }
 
     private HandMovement _handController;
     public HandMovement HandController { get { return _handController; } }
@@ -27,9 +29,8 @@ public class Player : MonoBehaviour {
 		
 	}
 	
-    public void Init (int playerNum)
+    public void Init ()
     {
-        PlayerNumber = playerNum;
         _handController.Init();
     }
 }

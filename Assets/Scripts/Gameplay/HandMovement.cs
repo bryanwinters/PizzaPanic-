@@ -64,22 +64,25 @@ public class HandMovement : MonoBehaviour {
 	// Update is called once per frame
 	void Update () 
     {
-        float vertical = Input.GetAxis(_controlsVertical);
-        float horizontal = Input.GetAxis(_controlsHorizontal);
+        if (GameManager.Instance.GameState == Constants.GameState.game)
+        {
+            float vertical = Input.GetAxis(_controlsVertical);
+            float horizontal = Input.GetAxis(_controlsHorizontal);
 
-        //look at center of table
-        this.transform.LookAt(_tableRef.transform.position);
+            //look at center of table
+            this.transform.LookAt(_tableRef.transform.position);
 
-        //move around pizza
-        //ABSOLUTE CONTROLS
+            //move around pizza
+            //ABSOLUTE CONTROLS
 //        Vector3 target = new Vector3(_tableRef.bounds.extents.x * horizontal, 
 //            _tableRef.transform.position.y,
 //            _tableRef.bounds.extents.z * vertical);
 //
 //        transform.position = Vector3.Lerp(this.transform.position, target, Time.deltaTime);
 
-        //RELATIVE CONTROLS
-        //transform.RotateAround(_tableRef.transform.position, Vector3.down, horizontal * 2f);
-        StartCoroutine(RotateObject(_tableRef.transform.position, Vector3.down, horizontal, _speed));
+            //RELATIVE CONTROLS
+            //transform.RotateAround(_tableRef.transform.position, Vector3.down, horizontal * 2f);
+            StartCoroutine(RotateObject(_tableRef.transform.position, Vector3.down, horizontal, _speed));
+        }
 	}
 }
