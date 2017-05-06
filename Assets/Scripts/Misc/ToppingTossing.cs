@@ -36,8 +36,9 @@ public class ToppingTossing : MonoBehaviour {
                 NewTopping.transform.position = gameObject.transform.position;
                 NewTopping.transform.rotation = gameObject.transform.rotation;
                 NewTopping.SetActive(true);
-                NewTopping.GetComponent<Rigidbody>().AddForce(gameObject.transform.right * -7f, ForceMode.Impulse);
-            }            
+                //NewTopping.GetComponent<Rigidbody>().AddForce(gameObject.transform.right * -7f, ForceMode.Impulse);
+                NewTopping.GetComponent<Rigidbody>().AddForce(gameObject.transform.right * -7f, ForceMode.VelocityChange);
+            }
         }
 	}
 }

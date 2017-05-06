@@ -33,5 +33,9 @@ public class PizzaToppingUnifier : MonoBehaviour {
             gameObject.GetComponent<Rigidbody>().isKinematic = true;
             gameObject.GetComponent<Rigidbody>().useGravity = false;
         }
+        else if(c.gameObject.layer == LayerMask.NameToLayer("ToppingCatcher"))
+        {
+            gameObject.SetActive(false);
+        }
     }
 }
