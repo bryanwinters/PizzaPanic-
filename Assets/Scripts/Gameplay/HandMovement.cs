@@ -8,6 +8,10 @@ public class HandMovement : MonoBehaviour {
     private float _speed = 0.4f;
 
     private CapsuleCollider _tableRef;
+    private Player _playerRef;
+
+    private string _controlsVertical;
+    private string _controlsHorizontal;
 
     private void Awake () 
     {
@@ -17,6 +21,7 @@ public class HandMovement : MonoBehaviour {
     private void SetupVariables ()
     {
         _tableRef = SessionManager.Instance.Table;
+        _playerRef = this.GetComponent<Player>();
     }
 
 	// Use this for initialization
@@ -24,6 +29,12 @@ public class HandMovement : MonoBehaviour {
     {
 		
 	}
+
+    public void Init ()
+    {
+        _controlsVertical = Constants.CONTROLS_VERTICAL + _playerRef.PlayerNumber;
+        _controlsHorizontal = Constants.CONTROLS_HORIZONTAL + _playerRef.PlayerNumber;
+    }
 
     public void SetToPosition (Vector2 axis)
     {
@@ -53,8 +64,8 @@ public class HandMovement : MonoBehaviour {
 	// Update is called once per frame
 	void Update () 
     {
-        float vertical = Input.GetAxis("Vertical");
-        float horizontal = Input.GetAxis("Horizontal");
+        float vertical = Input.GetAxis(_controlsVertical);
+        float horizontal = Input.GetAxis(_controlsHorizontal);
 
         //look at center of table
         this.transform.LookAt(_tableRef.transform.position);

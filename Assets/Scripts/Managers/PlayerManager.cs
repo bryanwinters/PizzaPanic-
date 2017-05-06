@@ -36,6 +36,7 @@ public class PlayerManager : MonoBehaviour, IManager {
         for (int i = 0; i < NumberOfPlayers; i++)
         {
             Player p = Instantiate(PlayerPrefab) as Player;
+            p.Init(i+1);
             p.HandController.SetToPosition(Constants.SPAWN_POSITION[i]);
             _players.Add(p);
         }
