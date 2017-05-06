@@ -17,7 +17,15 @@ public static class Constants : object {
     public static float PLAYER_SPAWN_OFFSET = 29f;
 
     //STRINGS
-    public const string TEST_STRING = "test";
+    //input
+    public const string CONTROLS_HORIZONTAL = "Horizontal";
+    public const string CONTROLS_VERTICAL = "Vertical";
+    public const string CONTROLS_ACTION = "Action";
+    public const string CONTROLS_DASH_RIGHT = "DashRight";
+    public const string CONTROLS_DASH_LEFT = "DashLeft";
+    public const string CONTROLS_CYCLE_RIGHT = "CycleRight";
+    public const string CONTROLS_CYCLE_LEFT = "CycleLeft";
+    public const string CONTROLS_OVEN_X = "OvenX";
 
     public static Vector2[] SPAWN_POSITION = new Vector2[]{new Vector2(-1,0), new Vector2(0,1), new Vector2(1,0), new Vector2(0,-1)};
 }
