@@ -1,54 +1,15 @@
 fileFormatVersion: 2
-guid: d95536e1232f7444488fbfcf73cd753e
+guid: d6bf4edbd408fdd4bb7e66cf1c69f91f
 timeCreated: 1494097888
 licenseType: Free
 ModelImporter:
   serializedVersion: 19
   fileIDToRecycleName:
-    100000: b_Dough_base
-    100002: b_Edge_1
-    100004: b_Edge_10
-    100006: b_Edge_11
-    100008: b_Edge_12
-    100010: b_Edge_13
-    100012: b_Edge_14
-    100014: b_Edge_15
-    100016: b_Edge_16
-    100018: b_Edge_2
-    100020: b_Edge_3
-    100022: b_Edge_4
-    100024: b_Edge_5
-    100026: b_Edge_6
-    100028: b_Edge_7
-    100030: b_Edge_8
-    100032: b_Edge_9
-    100034: m_pizzadough
-    100036: //RootNode
-    100038: PizzaROOT
-    400000: b_Dough_base
-    400002: b_Edge_1
-    400004: b_Edge_10
-    400006: b_Edge_11
-    400008: b_Edge_12
-    400010: b_Edge_13
-    400012: b_Edge_14
-    400014: b_Edge_15
-    400016: b_Edge_16
-    400018: b_Edge_2
-    400020: b_Edge_3
-    400022: b_Edge_4
-    400024: b_Edge_5
-    400026: b_Edge_6
-    400028: b_Edge_7
-    400030: b_Edge_8
-    400032: b_Edge_9
-    400034: m_pizzadough
-    400036: //RootNode
-    400038: PizzaROOT
-    4300000: m_pizzadough
-    7400000: Take 001
-    9500000: //RootNode
-    13700000: m_pizzadough
+    100000: //RootNode
+    400000: //RootNode
+    2300000: //RootNode
+    3300000: //RootNode
+    4300000: m_sauce_1
   materials:
     importMaterials: 1
     materialName: 0
@@ -113,7 +74,7 @@ ModelImporter:
     hasExtraRoot: 0
     skeletonHasParents: 1
   lastHumanDescriptionAvatarSource: {instanceID: 0}
-  animationType: 2
+  animationType: 0
   humanoidOversampling: 1
   additionalBone: 0
   userData: 
