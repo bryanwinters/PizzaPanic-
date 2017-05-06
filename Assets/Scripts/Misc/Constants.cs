@@ -11,7 +11,13 @@ public static class Constants : object {
 
     //NUMBERS
     public static int TEST_INT = 1;
+    public static int MIN_PLAYERS = 1;
+    public static int MAX_PLAYERS = 4;
+
+    public static float PLAYER_SPAWN_OFFSET = 29f;
 
     //STRINGS
     public const string TEST_STRING = "test";
+
+    public static Vector2[] SPAWN_POSITION = new Vector2[]{new Vector2(-1,0), new Vector2(0,1), new Vector2(1,0), new Vector2(0,-1)};
 }
