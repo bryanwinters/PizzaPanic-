@@ -8,6 +8,8 @@ using UnityEngine;
 /// </summary>
 public class GameManager : MonoBehaviour {
 
+    public System.Action<Constants.GameState> OnGameStateChanged;
+
     private static GameManager _instance;
     public static GameManager Instance
     {
@@ -22,6 +24,9 @@ public class GameManager : MonoBehaviour {
 
     private List<IManager> _managers = new List<IManager>();
 
+    private Constants.GameState _gameState;
+    public Constants.GameState GameState { get { return _gameState; } }
+
     private void Awake ()
     {
         SetupVariables();
@@ -30,8 +35,15 @@ public class GameManager : MonoBehaviour {
 	// Use this for initialization
 	private void Start ()
     {
-        StartCoroutine(StartGame());
+        _gameState = Constants.GameState.menu;
+
+        Init();
 	}
+
+    private void SubscribeToEvents ()
+    {
+        PlayerManager.Instance.OnPlayersReady += HandleOnPlayersReady;
+    }
 
     private void SetupVariables ()
     {
@@ -39,18 +51,38 @@ public class GameManager : MonoBehaviour {
         _managers = this.GetComponents<IManager>().ToList();
     }
 
+    private void SetGameState (Constants.GameState state)
+    {
+        if (_gameState != state)
+        {
+            _gameState = state;
+
+            if (OnGameStateChanged != null)
+                OnGameStateChanged(_gameState);
+        }
+    }
+
     public void Init()
     {
+        SubscribeToEvents();
+
         foreach (IManager m in _managers)
         {
             m.Init();
         }
     }
+
+    private void HandleOnPlayersReady ()
+    {
+        StartCoroutine(StartGame());
+    }
 	
     private IEnumerator StartGame ()
     {
-        yield return new WaitForSeconds(2f);
+        SetGameState(Constants.GameState.starting);
 
-        Init();
+        yield return new WaitForSeconds((float)Constants.MENU_STARTING_TIME);
+
+        SetGameState(Constants.GameState.game);
     }
 }
