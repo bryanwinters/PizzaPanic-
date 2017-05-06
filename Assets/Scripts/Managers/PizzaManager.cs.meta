@@ -1,0 +1,13 @@
+fileFormatVersion: 2
+guid: fc0ff36ab34b1f645a84e748079c94cd
+timeCreated: 1494098134
+licenseType: Free
+MonoImporter:
+  serializedVersion: 2
+  defaultReferences:
+  - dough: {fileID: 1660113141659030, guid: 4485bcefafc345e4e9d72fac821de6a8, type: 2}
+  executionOrder: 0
+  icon: {instanceID: 0}
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
