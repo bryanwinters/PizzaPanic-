@@ -71,8 +71,6 @@ public class GameManager : MonoBehaviour {
         {
             m.Init();
         }
-
-        StartCoroutine(StartGame());
     }
 
     private void HandleOnPlayersReady ()

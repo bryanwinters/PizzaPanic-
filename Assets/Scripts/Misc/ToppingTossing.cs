@@ -6,8 +6,8 @@ public class ToppingTossing : MonoBehaviour {
 
     Constants.Toppings currentTopping = Constants.Toppings.dough;
 
-    float minForce = -13f;
-    float maxForce = -7f;
+    float minForce = -17f;
+    float maxForce = -4f;
 
 	// Use this for initialization
 	void Start () {

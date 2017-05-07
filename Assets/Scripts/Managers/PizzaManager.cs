@@ -119,4 +119,68 @@ public class PizzaManager : MonoBehaviour, IManager {
     {
         currentPizza.UpdateToppings(topping, amount);
     }
+
+    public int GetAverageScore ()
+    {
+        int total = 0;
+
+        foreach(int score in TotalPizzaScores)
+        {
+            total += score;
+        }
+
+        if (total == 0)
+            return total;
+            
+        return Mathf.RoundToInt((float)total/(float)TotalPizzaScores.Count);
+    }
+
+    public int GetHighScore()
+    {
+        return Mathf.Max(TotalPizzaScores.ToArray());
+    }
+
+    public int GetLowScore()
+    {
+        return Mathf.Min(TotalPizzaScores.ToArray());
+    }
+
+    public int GetNumPizzas ()
+    {
+        return TotalPizzaScores.Count;
+    }
+
+    public string GetRanking ()
+    {
+        int avg = GetAverageScore();
+
+        if (avg >= 100)
+            return "S";
+        else if (avg < 100 && avg >= 95)
+            return "A+";
+        else if (avg < 95 && avg >= 85)
+            return "A";
+        else if (avg < 85 && avg >= 80)
+            return "A-";
+        else if (avg < 80 && avg >= 76)
+            return "B+";
+        else if (avg < 76 && avg >= 74)
+            return "B";
+        else if (avg < 74 && avg >= 70)
+            return "B-";
+        else if (avg < 70 && avg >= 66)
+            return "C+";
+        else if (avg < 66 && avg >= 64)
+            return "C";
+        else if (avg < 64 && avg >= 60)
+            return "C-";
+        else if (avg < 60 && avg >= 56)
+            return "D+";
+        else if (avg < 56 && avg >= 54)
+            return "D";
+        else if (avg < 54 && avg >= 50)
+            return "D-";
+        else 
+            return "F";
+    }
 }

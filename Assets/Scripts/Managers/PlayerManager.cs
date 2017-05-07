@@ -27,6 +27,7 @@ public class PlayerManager : MonoBehaviour, IManager {
 
     private List<MenuPlayer> _menuPlayers;
     private List<Player> _activePlayers = new List<Player>();
+    public int NumPlayers { get { return _activePlayers.Count; } }
 
     private List<int> _playersToSpawn = new List<int>();
     private int _playersReady;

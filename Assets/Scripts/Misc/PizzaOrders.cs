@@ -440,7 +440,7 @@ public class PizzaOrders : MonoBehaviour {
         ScoreTopping(toppingToCheck, NoSpinach, SpinachAmount, LightSpinach, MediumSpinach, ExtraSpinach);
 
         //Debug.LogError("Pizza Score: " + PizzaScore);
-        return PizzaScore;
+        return Mathf.Clamp(PizzaScore, 0, 100);
     }
 
     void ScoreTopping (int topp, bool isNotRequested, ToppingAmounts toppAmount, Vector2 lightTopps, Vector2 regularTopps, Vector2 extraTopps)
