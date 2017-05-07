@@ -33,6 +33,7 @@ public class PizzaToppingUnifier : MonoBehaviour {
             if(!AddedAlready)
             {
                 AddSelfToPizza();
+                AddedAlready = true;
             }
             
         }
@@ -47,6 +48,7 @@ public class PizzaToppingUnifier : MonoBehaviour {
             if( !AddedAlready )
             {
                 AddSelfToPizza();
+                AddedAlready = true;
             }
             
         }
@@ -69,6 +71,11 @@ public class PizzaToppingUnifier : MonoBehaviour {
             gameObject.transform.position = tempvec;
             gameObject.transform.localScale = new Vector3(0.12f, 0.12f, 0.06f);
 
+            if (!AddedAlready)
+            {
+                AddedAlready = true;
+                PizzaManager.SharedInstance.AddTopping(MyTopping);
+            }
             //gameObject.transform.DOScale(new Vector3(0.12f, 0.12f, 0.06f), 0.5f);
         }
         else

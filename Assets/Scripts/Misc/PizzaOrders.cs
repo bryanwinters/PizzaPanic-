@@ -103,6 +103,7 @@ public class PizzaOrders : MonoBehaviour {
         else
         {
             int sauceOrder = Random.Range(0, 10);
+            NoSauce = false;
             if( sauceOrder <= minSpecialOrder )
             {
                 SauceAmount = ToppingAmounts.light;
@@ -339,8 +340,75 @@ public class PizzaOrders : MonoBehaviour {
         CustomersPizza = pizza;
     }
 
-    void ScorePizza ()
+    public void ScorePizza ()
     {
-
+        if( !NoSauce )
+        {
+            int sauce = CustomersPizza.ReturnSauceAmount();
+            Debug.Log("Sauce: " + sauce);
+            if( SauceAmount == ToppingAmounts.light )
+            {
+                if ( sauce > LightSauce.x && sauce < LightSauce.y )
+                {
+                    //dont deduct points
+                    Debug.LogWarning("Light sauced!");
+                }
+                else if( sauce < LightSauce.x )
+                {
+                    PizzaScore -= Mathf.Abs((sauce - LightSauce.x));
+                    Debug.LogWarning("Badly Light sauced!");
+                }
+                else if( sauce > LightSauce.y )
+                {
+                    PizzaScore -= Mathf.Abs(LightSauce.y - sauce)*2;
+                    Debug.LogWarning("Badly Light sauced!");
+                }
+            }
+            else if (SauceAmount == ToppingAmounts.regular)
+            {
+                if (sauce > MediumSauce.x && sauce < MediumSauce.y)
+                {
+                    //dont deduct points
+                    Debug.LogWarning("Regular sauced!");
+                }
+                else if (sauce < MediumSauce.x)
+                {
+                    PizzaScore -= Mathf.Abs((sauce - MediumSauce.x));
+                    Debug.LogWarning("Badly Regular sauced!");
+                }
+                else if (sauce > MediumSauce.y)
+                {
+                    PizzaScore -= Mathf.Abs(MediumSauce.y - sauce) * 2;
+                    Debug.LogWarning("Badly Regular sauced!");
+                }
+            }
+            else if (SauceAmount == ToppingAmounts.extra)
+            {
+                if (sauce > ExtraSauce.x && sauce < ExtraSauce.y)
+                {
+                    //dont deduct points
+                    Debug.LogWarning("extra sauced!");
+                }
+                else if (sauce < ExtraSauce.x)
+                {
+                    PizzaScore -= Mathf.Abs((sauce - ExtraSauce.x));
+                    Debug.LogWarning("badly extra sauced!");
+                }
+                else if (sauce > ExtraSauce.y)
+                {
+                    PizzaScore -= Mathf.Abs(ExtraSauce.y - sauce) * 2;
+                    Debug.LogWarning("badly extra sauced!");
+                }
+            }
+        }
+        else if( NoSauce )
+        {
+            if(CustomersPizza.ReturnSauceAmount() > 0 )
+            {
+                PizzaScore -= 20;
+                Debug.LogWarning("I SAID NO SAUCE");
+            }
+        }
+        Debug.LogError("SCORE: " + PizzaScore);
     }
 }
