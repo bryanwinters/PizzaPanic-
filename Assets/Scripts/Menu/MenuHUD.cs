@@ -31,6 +31,7 @@ public class MenuHUD : MonoBehaviour {
     private void SubscribeToEvents () 
     {
         GameManager.Instance.OnGameStateChanged += HandleGameStateChanged;
+        PlayerManager.Instance.OnPizzaSubmitted += HandleNewPizza;
     }
 
     private void HandleGameStateChanged(Constants.GameState state)
@@ -39,6 +40,11 @@ public class MenuHUD : MonoBehaviour {
         {
             StartCoroutine(StartTimer());
         }
+    }
+
+    private void HandleNewPizza ()
+    {
+        //PizzaManager.SharedInstance.TheOrder.
     }
 
     private void SendTimerCompleteEvent ()
