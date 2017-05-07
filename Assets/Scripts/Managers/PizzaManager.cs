@@ -54,6 +54,7 @@ public class PizzaManager : MonoBehaviour, IManager {
         {
         }
 
+        //_BW TODO addcomponenet/getcomponent all expensive at runtime - especially in UPDATE
         currentPizzaObject = (GameObject)Instantiate(dough, Vector3.zero, Quaternion.identity);
         currentPizzaObject.gameObject.AddComponent<PizzaOrders>();
         currentPizzaObject.gameObject.GetComponent<PizzaOrders>().CreateOrder();

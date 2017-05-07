@@ -13,15 +13,15 @@ public class ObjectPooler : MonoBehaviour {
 
     /*dough = 0, sauce = 1, cheese = 2, pepperoni = 3, bacon = 4, anchovies = 5, greenPepper = 6,
         mushroom = 7, hotPepper = 8, pineapple = 9*/
-    public List<GameObject> PooledSauce;
-    public List<GameObject> PooledCheese;
-    public List<GameObject> PooledPepperoni;
-    public List<GameObject> PooledBacon;
-    public List<GameObject> PooledAnchovies;
-    public List<GameObject> PooledGreenPepper;
-    public List<GameObject> PooledMushroom;
-    public List<GameObject> PooledHotPepper;
-    public List<GameObject> PooledPineapple;
+    public List<PizzaToppingUnifier> PooledSauce;
+    public List<PizzaToppingUnifier> PooledCheese;
+    public List<PizzaToppingUnifier> PooledPepperoni;
+    public List<PizzaToppingUnifier> PooledBacon;
+    public List<PizzaToppingUnifier> PooledAnchovies;
+    public List<PizzaToppingUnifier> PooledGreenPepper;
+    public List<PizzaToppingUnifier> PooledMushroom;
+    public List<PizzaToppingUnifier> PooledHotPepper;
+    public List<PizzaToppingUnifier> PooledPineapple;
     //make lists of toppings to pool and do that
 
     public GameObject[] sauce, cheese, pepperoni, bacon, anchovies, greenpepper, mushroom, hotpepper, pineapple;
@@ -32,7 +32,7 @@ public class ObjectPooler : MonoBehaviour {
 
         if (sauce != null)
         {
-            PooledSauce = new List<GameObject>();
+            PooledSauce = new List<PizzaToppingUnifier>();
             for (int i = 0; i < amountToPool; i++)
             {
                 int objCounter = 0;
@@ -45,9 +45,10 @@ public class ObjectPooler : MonoBehaviour {
                     objCounter = 0;
                 }
                 GameObject obj = (GameObject)Instantiate(sauce[objCounter], gameObject.transform.position, Quaternion.Euler(-90f, 0f, 0f));
+                PizzaToppingUnifier p = obj.GetComponent<PizzaToppingUnifier>();
                 //obj.transform.Rotate(Vector3.right, 90f);
-                obj.SetActive(false);
-                PooledSauce.Add(obj);
+                p.gameObject.SetActive(false);
+                PooledSauce.Add(p);
             }
         }
 
@@ -62,26 +63,27 @@ public class ObjectPooler : MonoBehaviour {
             {
                 objCounter = 0;
             }
-            PooledPepperoni = new List<GameObject>();
+            PooledPepperoni = new List<PizzaToppingUnifier>();
             for (int i = 0; i < amountToPool; i++)
             {
                 GameObject obj = (GameObject)Instantiate(pepperoni[objCounter]);
-                obj.SetActive(false);
-                PooledPepperoni.Add(obj);
+                PizzaToppingUnifier p = obj.GetComponent<PizzaToppingUnifier>();
+                p.gameObject.SetActive(false);
+                PooledPepperoni.Add(p);
             }
         }
         
 		
 	}
 	
-    public GameObject GetTopping(Constants.Toppings toppingNumber)
+    public PizzaToppingUnifier GetTopping(Constants.Toppings toppingNumber)
     {
 
         if (toppingNumber == Constants.Toppings.sauce)
         {
             for (int i = 0; i < PooledSauce.Count; i++)
             {
-                if (!PooledSauce[i].activeInHierarchy)
+                if (!PooledSauce[i].gameObject.activeInHierarchy)
                 {
                     return PooledSauce[i];
                 }
@@ -91,7 +93,7 @@ public class ObjectPooler : MonoBehaviour {
         {
             for (int i = 0; i < PooledCheese.Count; i++)
             {
-                if (!PooledCheese[i].activeInHierarchy)
+                if (!PooledCheese[i].gameObject.activeInHierarchy)
                 {
                     return PooledCheese[i];
                 }
@@ -101,7 +103,7 @@ public class ObjectPooler : MonoBehaviour {
         {
             for (int i = 0; i < PooledPepperoni.Count; i++)
             {
-                if (!PooledPepperoni[i].activeInHierarchy)
+                if (!PooledPepperoni[i].gameObject.activeInHierarchy)
                 {
                     return PooledPepperoni[i];
                 }
@@ -111,7 +113,7 @@ public class ObjectPooler : MonoBehaviour {
         {
             for (int i = 0; i < PooledBacon.Count; i++)
             {
-                if (!PooledBacon[i].activeInHierarchy)
+                if (!PooledBacon[i].gameObject.activeInHierarchy)
                 {
                     return PooledBacon[i];
                 }
@@ -121,7 +123,7 @@ public class ObjectPooler : MonoBehaviour {
         {
             for (int i = 0; i < PooledAnchovies.Count; i++)
             {
-                if (!PooledAnchovies[i].activeInHierarchy)
+                if (!PooledAnchovies[i].gameObject.activeInHierarchy)
                 {
                     return PooledAnchovies[i];
                 }
@@ -131,7 +133,7 @@ public class ObjectPooler : MonoBehaviour {
         {
             for (int i = 0; i < PooledGreenPepper.Count; i++)
             {
-                if (!PooledGreenPepper[i].activeInHierarchy)
+                if (!PooledGreenPepper[i].gameObject.activeInHierarchy)
                 {
                     return PooledGreenPepper[i];
                 }
@@ -141,7 +143,7 @@ public class ObjectPooler : MonoBehaviour {
         {
             for (int i = 0; i < PooledMushroom.Count; i++)
             {
-                if (!PooledMushroom[i].activeInHierarchy)
+                if (!PooledMushroom[i].gameObject.activeInHierarchy)
                 {
                     return PooledMushroom[i];
                 }
@@ -151,7 +153,7 @@ public class ObjectPooler : MonoBehaviour {
         {
             for (int i = 0; i < PooledHotPepper.Count; i++)
             {
-                if (!PooledHotPepper[i].activeInHierarchy)
+                if (!PooledHotPepper[i].gameObject.activeInHierarchy)
                 {
                     return PooledHotPepper[i];
                 }
@@ -161,7 +163,7 @@ public class ObjectPooler : MonoBehaviour {
         {
             for (int i = 0; i < PooledPineapple.Count; i++)
             {
-                if (!PooledPineapple[i].activeInHierarchy)
+                if (!PooledPineapple[i].gameObject.activeInHierarchy)
                 {
                     return PooledPineapple[i];
                 }
@@ -171,9 +173,4 @@ public class ObjectPooler : MonoBehaviour {
         Debug.LogWarning("No topping returned.");
         return null;
     }
-
-	// Update is called once per frame
-	void Update () {
-		
-	}
 }

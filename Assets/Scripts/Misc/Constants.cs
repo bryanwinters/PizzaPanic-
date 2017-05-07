@@ -16,7 +16,7 @@ public static class Constants : object {
     public static int MAX_PLAYERS = 4;
 
     //gameplay
-    public static float PLAYER_SPAWN_OFFSET = 29f;
+    public static float PLAYER_SPAWN_OFFSET = 5f;
     public static int GAME_STARTING_TIME = 120;
 
     //controls
@@ -24,6 +24,11 @@ public static class Constants : object {
 
     //menu
     public static int MENU_STARTING_TIME = 3;
+
+    //layers
+    public const string LAYER_PIZZA = "Pizza";
+    public const string LAYER_PIZZA_TOPPINGS = "PizzaTopping";
+    public const string LAYER_TOPPING_CATCHER = "ToppingCatcher";
 
     //STRINGS
     //input
