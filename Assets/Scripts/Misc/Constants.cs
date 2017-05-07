@@ -53,8 +53,8 @@ public static class Constants : object {
     public const string MENU_GAME_STARTING = "Game Starting in ";
 
     //hud
-    public const string HUD_OVEN_PREPPING_PIZZA = "Prepping Pizza";
-    public const string HUD_OVEN_READY = "Ready to Fire!";
+    public const string HUD_OVEN_PREPPING_PIZZA = "Prepping";
+    public const string HUD_OVEN_READY = "Ready!";
 
     public static Vector2[] SPAWN_POSITION = new Vector2[]{new Vector2(-1,0), new Vector2(0,1), new Vector2(1,0), new Vector2(0,-1)};
 }
