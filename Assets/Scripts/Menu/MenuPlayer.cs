@@ -12,6 +12,10 @@ public class MenuPlayer : MonoBehaviour {
     public int PlayerNumber = 1;
 
     [SerializeField] private Image _readyImage;
+    [SerializeField] private Image _buttonImage;
+
+    [SerializeField] private Sprite _aButton;
+    [SerializeField] private Sprite _triggerButton;
 
     private bool _isActive = false;
     private bool _isReady = false;
@@ -73,6 +77,12 @@ public class MenuPlayer : MonoBehaviour {
 
             float alpha = (_isActive == true) ? 1f : 0f;
             _readyImage.DOFade(alpha, 0f);
+
+            Sprite s = (_isActive == true) ? _triggerButton : _aButton;
+            _buttonImage.sprite = s;
+
+            float alphaButton = (_isActive == false) ? 1f : 0.4f;
+            _buttonImage.DOFade(alphaButton, 0f);
         }
     }
 
@@ -82,6 +92,9 @@ public class MenuPlayer : MonoBehaviour {
         {
             _isReady = isReady;
             SendPlayerReadyEvent();
+
+            float alpha = (_isReady == true) ? 1f : 0.4f;
+            _buttonImage.DOFade(alpha, 0f);
         }
     }
 
