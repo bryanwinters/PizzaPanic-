@@ -4,16 +4,6 @@ using UnityEngine;
 
 public class ToppingTossing : MonoBehaviour {
 
-    public GameObject[] Sauce;
-    public GameObject[] Cheese;
-    public GameObject[] Pepperoni;
-    public GameObject[] Bacon;
-    public GameObject[] Anchovies;
-    public GameObject[] GreenPepper;
-    public GameObject[] Mushroom;
-    public GameObject[] HotPepper;
-    public GameObject[] Pineapple;
-
     Constants.Toppings currentTopping = Constants.Toppings.dough;
 
     float minForce = -13f;
@@ -21,15 +11,7 @@ public class ToppingTossing : MonoBehaviour {
 
 	// Use this for initialization
 	void Start () {
-        if (Sauce.Length <= 0)
-        {
-            Debug.LogError("No sauce in array, order more.");
-        }
 
-        if (Pepperoni.Length <= 0)
-        {
-            Debug.LogError("No pepperoni in array, order more.");
-        }
 	}
 	
 	// Update is called once per frame
@@ -55,6 +37,8 @@ public class ToppingTossing : MonoBehaviour {
             }
             Debug.Log("Current: " + currentTopping.ToString());
         }
+
+
 
         if(Input.GetKeyDown(KeyCode.Space))
         {

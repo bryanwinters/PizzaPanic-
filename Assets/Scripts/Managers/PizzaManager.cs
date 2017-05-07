@@ -37,7 +37,8 @@ public class PizzaManager : MonoBehaviour, IManager {
         {
             NewPizza();
         }
-	}
+        
+    }
 
     public void NewPizza ( )
     {
@@ -53,8 +54,11 @@ public class PizzaManager : MonoBehaviour, IManager {
         }
 
         currentPizzaObject = (GameObject)Instantiate(dough, Vector3.zero, Quaternion.identity);
+        currentPizzaObject.gameObject.AddComponent<PizzaOrders>();
+        currentPizzaObject.gameObject.GetComponent<PizzaOrders>().CreateOrder();
         currentPizzaObject.gameObject.AddComponent<PizzaClass>();
         currentPizza = currentPizzaObject.GetComponent<PizzaClass>();
+        currentPizzaObject.gameObject.GetComponent<PizzaOrders>().DeliverPizza(currentPizza);
 
     }
 

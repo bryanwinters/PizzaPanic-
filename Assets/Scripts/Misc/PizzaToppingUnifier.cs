@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using DG.Tweening;
 
 public class PizzaToppingUnifier : MonoBehaviour {
 
@@ -66,7 +67,9 @@ public class PizzaToppingUnifier : MonoBehaviour {
             Vector3 tempvec = gameObject.transform.position;
             tempvec.y = 0.14f;
             gameObject.transform.position = tempvec;
-            //gameObject.transform.localScale = new Vector3(0.8f, 0.8f, 0.8f);
+            gameObject.transform.localScale = new Vector3(0.12f, 0.12f, 0.06f);
+
+            //gameObject.transform.DOScale(new Vector3(0.12f, 0.12f, 0.06f), 0.5f);
         }
         else
         {
