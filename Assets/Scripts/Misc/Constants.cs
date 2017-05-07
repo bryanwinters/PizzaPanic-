@@ -24,7 +24,10 @@ public static class Constants : object {
 
     //gameplay
     public static float PLAYER_SPAWN_OFFSET = 5f;
-    public static int GAME_STARTING_TIME = 5;//120;
+    public static int GAME_STARTING_TIME = 500;//120;
+    public static Vector3 SMALL_PIZZA_SCALE = new Vector3(2.5f, 1f, 2.5f);
+    public static Vector3 MEDIUM_PIZZA_SCALE = new Vector3(4f, 1f, 4f);
+    public static Vector3 LARGE_PIZZA_SCALE = new Vector3(5f, 1f, 5f);
 
     //controls
     public static float CONTROLLER_TRIGGER_DEAD_ZONE = 0.5f;

@@ -25,9 +25,13 @@ public class HandMovement : MonoBehaviour {
     private string _controlsDash;
     private string _controlsAction;
 
+    //_ME
+    private DoughPulling pullDoughScript;
+
     private void Awake () 
     {
         SetupVariables();
+        pullDoughScript = gameObject.GetComponentInChildren<DoughPulling>();
     }
 
     private void SetupVariables ()
@@ -136,24 +140,31 @@ public class HandMovement : MonoBehaviour {
             if (Input.GetButtonDown(_controlsAction))
             {
                 //animation
-                if(_playerRef.ActiveTopping == Constants.Toppings.dough)
+                if (_playerRef.ActiveTopping == Constants.Toppings.dough)
+                {
                     _playerRef.PlayAnimation(Constants.ANIMATION_PLAYER_GRIP);
+                    Debug.Log("PULL");
+                    pullDoughScript.PULLDOUGH();
+                    PizzaManager.SharedInstance.doughMeshScript.FixMyMeshCollider();
+                }
                 else
+                {
                     _playerRef.PlayAnimation(Constants.ANIMATION_PLAYER_THROW);
 
-                //action
-                //firetoppings
-                PizzaToppingUnifier NewTopping = ObjectPooler.SharedInstance.GetTopping(_playerRef.ActiveTopping);
-                if( NewTopping != null )
-                {
+                    //action
+                    //firetoppings
+                    PizzaToppingUnifier NewTopping = ObjectPooler.SharedInstance.GetTopping(_playerRef.ActiveTopping);
+                    if (NewTopping != null)
                     {
-                        Vector3 target = _playerRef.transform.position + _tableRef.transform.position;
-                        Vector3 spawnPos = gameObject.transform.position + Random.onUnitSphere * 0.6f;
-                        NewTopping.transform.position = spawnPos;
-                        NewTopping.gameObject.SetActive(true);
-                        NewTopping.Rigidbody.AddForce(target.normalized * Random.Range(minForce, maxForce), ForceMode.VelocityChange);
-                    }
+                        {
+                            Vector3 target = _playerRef.transform.position + _tableRef.transform.position;
+                            Vector3 spawnPos = gameObject.transform.position + Random.onUnitSphere * 0.6f;
+                            NewTopping.transform.position = spawnPos;
+                            NewTopping.gameObject.SetActive(true);
+                            NewTopping.Rigidbody.AddForce(target.normalized * Random.Range(minForce, maxForce), ForceMode.VelocityChange);
+                        }
 
+                    }
                 }
             }
  
