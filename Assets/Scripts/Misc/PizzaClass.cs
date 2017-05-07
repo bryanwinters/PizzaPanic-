@@ -31,16 +31,40 @@ public class PizzaClass : MonoBehaviour {
     int hotPepperAmount;
     int pineappleAmount;
     int spinachAmount;
-    
 
+    float totalDistance, averageDistance;
 
     // Use this for initialization
-    void Start () {
-		
-	}
+    void Start ()
+    {
+        totalDistance = 0;
+        averageDistance = 0;
+        for ( int x = 0; x < PizzaManager.SharedInstance.doughMeshScript.BonePos.Length; x++ )
+        {
+
+            totalDistance += Vector3.Distance(PizzaManager.SharedInstance.doughMeshScript.BonePos[x].position, PizzaManager.SharedInstance.currentPizzaObject.transform.position);
+        }
+        Debug.Log("Starting Pizza total: " + totalDistance);
+        averageDistance = totalDistance / PizzaManager.SharedInstance.doughMeshScript.BonePos.Length;
+        Debug.Log("Starting Pizza average: " + averageDistance);
+
+
+    }
 	
 	// Update is called once per frame
 	void Update () {
+        if( Input.GetKeyDown(KeyCode.K))
+        {
+            totalDistance = 0;
+            averageDistance = 0;
+            for (int x = 0; x < PizzaManager.SharedInstance.doughMeshScript.BonePos.Length; x++)
+            {
+                totalDistance += Vector3.Distance(PizzaManager.SharedInstance.doughMeshScript.BonePos[x].position, PizzaManager.SharedInstance.currentPizzaObject.transform.position);
+            }
+            Debug.Log("Current pizza total: " + totalDistance);
+            averageDistance = totalDistance / PizzaManager.SharedInstance.doughMeshScript.BonePos.Length;
+            Debug.Log("Current pizza average: " + averageDistance);
+        }
 		
 	}
 
@@ -92,9 +116,59 @@ public class PizzaClass : MonoBehaviour {
         }
     }
 
-    public int ReturnDoughSize()
+    public int ReturnDoughScore(Constants.PizzaSizes size)
     {
-        return doughSize;
+        //0,1,2,3
+        Constants.PizzaSizes mysize = Constants.PizzaSizes.tooSmall;
+
+        totalDistance = 0;
+        averageDistance = 0;
+        for (int x = 0; x < PizzaManager.SharedInstance.doughMeshScript.BonePos.Length; x++)
+        {
+            totalDistance += Vector3.Distance(PizzaManager.SharedInstance.doughMeshScript.BonePos[x].position, PizzaManager.SharedInstance.currentPizzaObject.transform.position);
+        }
+        Debug.Log("Current pizza total: " + totalDistance);
+        averageDistance = totalDistance / PizzaManager.SharedInstance.doughMeshScript.BonePos.Length;
+        Debug.Log("Current pizza average: " + averageDistance);
+
+        if( averageDistance < Constants.MIN_SMALL_PIZZA )
+        {
+            mysize = Constants.PizzaSizes.tooSmall;
+        }
+        else if( averageDistance >= Constants.MIN_SMALL_PIZZA && averageDistance <= Constants.MAX_SMALL_PIZZA)
+        {
+            mysize = Constants.PizzaSizes.small;
+        }
+        else if( averageDistance >= Constants.MIN_MEDIUM_PIZZA && averageDistance <= Constants.MAX_SMALL_PIZZA )
+        {
+            mysize = Constants.PizzaSizes.medium;
+        }
+        else if( averageDistance >= Constants.MIN_LARGE_PIZZA && averageDistance <= Constants.MAX_LARGE_PIZZA)
+        {
+            mysize = Constants.PizzaSizes.large;
+        }
+        else if( averageDistance >= Constants.MAX_LARGE_PIZZA)
+        {
+            mysize = Constants.PizzaSizes.tooLarge;
+        }
+
+        if( mysize == size )
+        {
+            return 0;
+        }
+        else if( mysize > size )
+        {
+            return -10;
+        }
+        else if( mysize < size)
+        {
+            return -15;
+        }
+
+        Debug.LogWarning("failed check");
+        return 0;
+        
+
     }
 
     public int ReturnSauceAmount()
@@ -137,5 +211,9 @@ public class PizzaClass : MonoBehaviour {
     {
         return spinachAmount;
     }
-    
+
+    public int CalculateDoughSize()
+    {
+        return 1;
+    }
 }

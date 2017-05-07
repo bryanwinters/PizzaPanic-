@@ -7,6 +7,7 @@ public static class Constants : object {
     //ENUMS
     public enum Toppings {dough = 0, sauce = 1, cheese = 2, pepperoni = 3, bacon = 4, anchovies = 5, greenPepper = 6,
         mushroom = 7, hotPepper = 8, pineapple = 9, spinach = 10}
+    public enum PizzaSizes { tooSmall = 0, small, medium, large, tooLarge}
     public enum Characters {meowzzarella = 0, octopie = 1, crustodile = 2, bonemando = 3}
     public enum GameState {menu = 0, starting = 1, game = 2, end = 3}
 
@@ -14,6 +15,12 @@ public static class Constants : object {
     //settings
     public static int MIN_PLAYERS = 1;
     public static int MAX_PLAYERS = 4;
+    public static float MIN_SMALL_PIZZA = 1.7f;
+    public static float MAX_SMALL_PIZZA = 1.75f;
+    public static float MIN_MEDIUM_PIZZA = 1.75f;
+    public static float MAX_MEDIUM_PIZZA = 1.8f;
+    public static float MIN_LARGE_PIZZA = 1.8f;
+    public static float MAX_LARGE_PIZZA = 1.85f;
 
     //gameplay
     public static float PLAYER_SPAWN_OFFSET = 5f;

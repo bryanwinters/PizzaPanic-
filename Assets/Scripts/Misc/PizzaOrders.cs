@@ -4,8 +4,8 @@ using UnityEngine;
 
 public class PizzaOrders : MonoBehaviour {
 
-    enum PizzaSizes { small = 0, medium, large};
-    PizzaSizes PizzaOrderSize;
+    //enum PizzaSizes { small = 0, medium, large};
+    Constants.PizzaSizes PizzaOrderSize;
     enum ToppingAmounts { light = 0, regular, extra};
 
     PizzaClass CustomersPizza;
@@ -93,7 +93,7 @@ public class PizzaOrders : MonoBehaviour {
     {
         Debug.Log("Order Incoming!");
         int size = Random.Range(0, 3);
-        PizzaOrderSize = (PizzaSizes)size;
+        PizzaOrderSize = (Constants.PizzaSizes)size;
         Debug.Log(PizzaOrderSize.ToString() + " pizza.");
 
         int sauceMyPizza = Random.Range(0, 10);
@@ -349,6 +349,11 @@ public class PizzaOrders : MonoBehaviour {
 
     public int ScorePizza ()
     {
+        //score dough
+        PizzaScore += CustomersPizza.ReturnDoughScore(PizzaOrderSize);
+
+
+
         //score sauce
         //Debug.LogWarning("Score sauce");
         toppingToCheck = CustomersPizza.ReturnSauceAmount();
@@ -396,7 +401,7 @@ public class PizzaOrders : MonoBehaviour {
 
     void ScoreTopping (int topp, bool isNotRequested, ToppingAmounts toppAmount, Vector2 lightTopps, Vector2 regularTopps, Vector2 extraTopps)
     {
-
+        
 
         if (!isNotRequested)
         {

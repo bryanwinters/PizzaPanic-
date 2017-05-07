@@ -16,9 +16,10 @@ public class PizzaManager : MonoBehaviour, IManager {
     public GameObject dough;
     List<PizzaClass> PizzaList = new List<PizzaClass>();
     List<GameObject> PizzaObjects = new List<GameObject>();
-    GameObject currentPizzaObject;
+    public GameObject currentPizzaObject;
     PizzaClass currentPizza;
     PizzaOrders theOrder;
+    public MeshFix doughMeshScript;
 
     List<int> TotalPizzaScores = new List<int>(); //receives all of the pizza scores for averaging and finding highest/lowest
 
@@ -60,6 +61,7 @@ public class PizzaManager : MonoBehaviour, IManager {
 
         //_BW TODO addcomponenet/getcomponent all expensive at runtime - especially in UPDATE
         currentPizzaObject = (GameObject)Instantiate(dough, Vector3.zero, Quaternion.identity);
+        doughMeshScript = currentPizzaObject.GetComponentInChildren<MeshFix>();
         theOrder = currentPizzaObject.gameObject.AddComponent<PizzaOrders>();
         theOrder.CreateOrder();
         //_ME cleaned up this a bit
