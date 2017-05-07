@@ -44,9 +44,9 @@ public class PizzaClass : MonoBehaviour {
 
             totalDistance += Vector3.Distance(PizzaManager.SharedInstance.doughMeshScript.BonePos[x].position, PizzaManager.SharedInstance.currentPizzaObject.transform.position);
         }
-        Debug.Log("Starting Pizza total: " + totalDistance);
+        //Debug.Log("Starting Pizza total: " + totalDistance);
         averageDistance = totalDistance / PizzaManager.SharedInstance.doughMeshScript.BonePos.Length;
-        Debug.Log("Starting Pizza average: " + averageDistance);
+        //Debug.Log("Starting Pizza average: " + averageDistance);
 
 
     }
@@ -61,9 +61,9 @@ public class PizzaClass : MonoBehaviour {
             {
                 totalDistance += Vector3.Distance(PizzaManager.SharedInstance.doughMeshScript.BonePos[x].position, PizzaManager.SharedInstance.currentPizzaObject.transform.position);
             }
-            Debug.Log("Current pizza total: " + totalDistance);
+            //Debug.Log("Current pizza total: " + totalDistance);
             averageDistance = totalDistance / PizzaManager.SharedInstance.doughMeshScript.BonePos.Length;
-            Debug.Log("Current pizza average: " + averageDistance);
+            //Debug.Log("Current pizza average: " + averageDistance);
         }
 		
 	}
