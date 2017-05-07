@@ -28,9 +28,9 @@ public class PizzaOrders : MonoBehaviour {
 
     bool NoPepperoni = true;
     ToppingAmounts PepperoniAmount = ToppingAmounts.regular;
-    Vector2 LightPepperoni = new Vector2(30f, 60f);
-    Vector2 MediumPepperoni = new Vector2(61f, 90f);
-    Vector2 ExtraPepperoni = new Vector2(91f, 150f);
+    Vector2 LightPepperoni = new Vector2(5f, 10f);
+    Vector2 MediumPepperoni = new Vector2(10f, 20f);
+    Vector2 ExtraPepperoni = new Vector2(20f, 50f);
 
     bool NoBacon = true;
     ToppingAmounts BaconAmount = ToppingAmounts.regular;
@@ -73,6 +73,8 @@ public class PizzaOrders : MonoBehaviour {
     Vector2 LightSpinach = new Vector2(30f, 60f);
     Vector2 MediumSpinach = new Vector2(61f, 90f);
     Vector2 ExtraSpinach = new Vector2(91f, 150f);
+
+    int toppingToCheck;
 
     // Use this for initialization
     void Start () {
@@ -130,6 +132,7 @@ public class PizzaOrders : MonoBehaviour {
         }
         else
         {
+            NoCheese = false;
             int cheeseOrder = Random.Range(0, 10);
             if (cheeseOrder <= minSpecialOrder)
             {
@@ -148,7 +151,7 @@ public class PizzaOrders : MonoBehaviour {
             }
         }
 
-        int NumberOfToppings = Random.Range(1, 8);
+        int NumberOfToppings = Random.Range(1, 9);
         //int[] ToppingsOrder = new int[NumberOfToppings];
         List<int> RandomToppings = new List<int>();
         List<int> ToppingsList = new List<int>();
@@ -331,6 +334,10 @@ public class PizzaOrders : MonoBehaviour {
                     Debug.Log("Spinach.");
                 }
             }
+            else
+            {
+                Debug.LogError("oops.");
+            }
         }
         Debug.Log("Order ended.");
     }
@@ -342,6 +349,131 @@ public class PizzaOrders : MonoBehaviour {
 
     public void ScorePizza ()
     {
+        //score sauce
+        Debug.LogWarning("Score sauce");
+        toppingToCheck = CustomersPizza.ReturnSauceAmount();
+        ScoreTopping(toppingToCheck, NoSauce, SauceAmount, LightSauce, MediumSauce, ExtraSauce);
+        //score cheese
+        Debug.LogWarning("Score cheese");
+        toppingToCheck = CustomersPizza.ReturnCheeseAmount();
+        ScoreTopping(toppingToCheck, NoCheese, CheeseAmount, LightCheese, MediumCheese, ExtraCheese);
+        //score pepperoni
+        Debug.LogWarning("Score pepperoni");
+        toppingToCheck = CustomersPizza.ReturnPepperoniAmount();
+        ScoreTopping(toppingToCheck, NoPepperoni, PepperoniAmount, LightPepperoni, MediumPepperoni, ExtraPepperoni);
+        //score bacon
+        Debug.LogWarning("Score bacon");
+        toppingToCheck = CustomersPizza.ReturnBaconAmount();
+        ScoreTopping(toppingToCheck, NoBacon, BaconAmount, LightBacon, MediumBacon, ExtraBacon);
+        //score anchovies
+        Debug.LogWarning("Score anchovies");
+        toppingToCheck = CustomersPizza.ReturnAnchoviesAmount();
+        ScoreTopping(toppingToCheck, NoAnchovies, AnchoviesAmount, LightAnchovies, MediumAnchovies, ExtraAnchovies);
+        //score green pepper
+        Debug.LogWarning("Score greenpepper");
+        toppingToCheck = CustomersPizza.ReturnGreenPepperAmount();
+        ScoreTopping(toppingToCheck, NoGreenPepper, GreenPepperAmount, LightGreenPepper, MediumGreenPepper, ExtraGreenPepper);
+        //score mushroom
+        Debug.LogWarning("Score mushroom");
+        toppingToCheck = CustomersPizza.ReturnMushroomAmount();
+        ScoreTopping(toppingToCheck, NoMushroom, MushroomAmount, LightMushroom, MediumMushroom, ExtraMushroom);
+        //score hot pepper
+        Debug.LogWarning("Score hotpepper");
+        toppingToCheck = CustomersPizza.ReturnHotPepperAmount();
+        ScoreTopping(toppingToCheck, NoHotPepper, HotPepperAmount, LightHotPepper, MediumHotPepper, ExtraHotPepper);
+        //score pineapple
+        Debug.LogWarning("Score pineapple");
+        toppingToCheck = CustomersPizza.ReturnPineappleAmount();
+        ScoreTopping(toppingToCheck, NoPineapple, PineappleAmount, LightPineapple, MediumPineapple, ExtraPineapple);
+        //score spinach
+        Debug.LogWarning("Score spinach");
+        toppingToCheck = CustomersPizza.ReturnSpinachAmount();
+        ScoreTopping(toppingToCheck, NoSpinach, SpinachAmount, LightSpinach, MediumSpinach, ExtraSpinach);
+
+        Debug.LogError("Pizza Score: " + PizzaScore);
+    }
+
+    void ScoreTopping (int topp, bool isNotRequested, ToppingAmounts toppAmount, Vector2 lightTopps, Vector2 regularTopps, Vector2 extraTopps)
+    {
+
+
+        if (!isNotRequested)
+        {
+            
+            Debug.Log("Number on pizza of current topping: " + topp);
+            if (toppAmount == ToppingAmounts.light)
+            {
+                Debug.Log("Entered light");
+                if (topp > lightTopps.x && topp < lightTopps.y)
+                {
+                    //dont deduct points
+                    Debug.LogWarning("Score 1");
+                }
+                else if (topp < lightTopps.x)
+                {
+                    PizzaScore -= Mathf.Abs((topp - lightTopps.x));
+                    Debug.LogWarning("Score 2");
+                }
+                else if (topp > lightTopps.y)
+                {
+                    PizzaScore -= Mathf.Abs(lightTopps.y - topp) * 2;
+                    Debug.LogWarning("Score 3");
+                }
+            }
+            else if (toppAmount == ToppingAmounts.regular)
+            {
+                Debug.Log("Entered regular");
+                if (topp > regularTopps.x && topp < regularTopps.y)
+                {
+                    //dont deduct points
+                    Debug.LogWarning("Score 4");
+                }
+                else if (topp < regularTopps.x)
+                {
+                    PizzaScore -= Mathf.Abs((topp - regularTopps.x));
+                    Debug.LogWarning("Score 5");
+                }
+                else if (topp > regularTopps.y)
+                {
+                    PizzaScore -= Mathf.Abs(regularTopps.y - topp) * 2;
+                    Debug.LogWarning("Score 6");
+                }
+            }
+            else if (toppAmount == ToppingAmounts.extra)
+            {
+                Debug.Log("Entered extra");
+                if (topp > extraTopps.x && topp < extraTopps.y)
+                {
+                    //dont deduct points
+                    Debug.LogWarning("Score 7");
+                }
+                else if (topp < extraTopps.x)
+                {
+                    PizzaScore -= Mathf.Abs((topp - extraTopps.x));
+                    Debug.LogWarning("Score 8");
+                }
+                else if (topp > extraTopps.y)
+                {
+                    PizzaScore -= Mathf.Abs(extraTopps.y - topp) * 2;
+                    Debug.LogWarning("Score 9");
+                }
+            }
+        }
+        else if (isNotRequested)
+        {
+            Debug.Log("Entered not requested");
+            if (topp > 0)
+            {
+                PizzaScore -= 20;
+                Debug.LogWarning("I SAID NO");
+            }
+        }
+    }
+
+
+    public void ScorePizzaTwo ()
+    {
+        //Judge the sauce
         if( !NoSauce )
         {
             int sauce = CustomersPizza.ReturnSauceAmount();
@@ -409,6 +541,78 @@ public class PizzaOrders : MonoBehaviour {
                 Debug.LogWarning("I SAID NO SAUCE");
             }
         }
+        //Judge the sauce
+
+        //Judge the cheese
+        if (!NoCheese)
+        {
+            int sauce = CustomersPizza.ReturnSauceAmount();
+            Debug.Log("Sauce: " + sauce);
+            if (CheeseAmount == ToppingAmounts.light)
+            {
+                if (sauce > LightCheese.x && sauce < LightCheese.y)
+                {
+                    //dont deduct points
+                    Debug.LogWarning("Light sauced!");
+                }
+                else if (sauce < LightCheese.x)
+                {
+                    PizzaScore -= Mathf.Abs((sauce - LightCheese.x));
+                    Debug.LogWarning("Badly Light sauced!");
+                }
+                else if (sauce > LightCheese.y)
+                {
+                    PizzaScore -= Mathf.Abs(LightCheese.y - sauce) * 2;
+                    Debug.LogWarning("Badly Light sauced!");
+                }
+            }
+            else if (CheeseAmount == ToppingAmounts.regular)
+            {
+                if (sauce > MediumCheese.x && sauce < MediumCheese.y)
+                {
+                    //dont deduct points
+                    Debug.LogWarning("Regular sauced!");
+                }
+                else if (sauce < MediumCheese.x)
+                {
+                    PizzaScore -= Mathf.Abs((sauce - MediumCheese.x));
+                    Debug.LogWarning("Badly Regular sauced!");
+                }
+                else if (sauce > MediumCheese.y)
+                {
+                    PizzaScore -= Mathf.Abs(MediumCheese.y - sauce) * 2;
+                    Debug.LogWarning("Badly Regular sauced!");
+                }
+            }
+            else if (SauceAmount == ToppingAmounts.extra)
+            {
+                if (sauce > ExtraCheese.x && sauce < ExtraCheese.y)
+                {
+                    //dont deduct points
+                    Debug.LogWarning("extra sauced!");
+                }
+                else if (sauce < ExtraCheese.x)
+                {
+                    PizzaScore -= Mathf.Abs((sauce - ExtraCheese.x));
+                    Debug.LogWarning("badly extra sauced!");
+                }
+                else if (sauce > ExtraCheese.y)
+                {
+                    PizzaScore -= Mathf.Abs(ExtraCheese.y - sauce) * 2;
+                    Debug.LogWarning("badly extra sauced!");
+                }
+            }
+        }
+        else if (NoCheese)
+        {
+            if (CustomersPizza.ReturnSauceAmount() > 0)
+            {
+                PizzaScore -= 20;
+                Debug.LogWarning("I SAID NO CHEESE");
+            }
+        }
+        //Judge the sauce
+
         Debug.LogError("SCORE: " + PizzaScore);
     }
 }

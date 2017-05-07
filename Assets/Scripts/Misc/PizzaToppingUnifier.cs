@@ -42,6 +42,7 @@ public class PizzaToppingUnifier : MonoBehaviour {
             
         }
         //_BW TODO what does this do?? toppings collide with each other??
+        //_ME when toppings hit the pizza it disables their physics so things arent moving around
 //        else if( c.gameObject.layer == LayerMask.NameToLayer(Constants.LAYER_PIZZA_TOPPINGS))
 //        {
 //            //become one;
