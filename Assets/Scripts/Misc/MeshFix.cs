@@ -7,6 +7,8 @@ public class MeshFix : MonoBehaviour {
     SkinnedMeshRenderer meshRenderer;
     MeshCollider collider;
 
+    public Transform[] BonePos;
+
     // Use this for initialization
     void Start () {
 		
@@ -17,7 +19,7 @@ public class MeshFix : MonoBehaviour {
         if (Input.GetKeyDown(KeyCode.T))
         {
             //_BW TODO addcomponenet/getcomponent all expensive at runtime - especially in UPDATE
-            MeshCollider mc = gameObject.GetComponent<MeshCollider>();
+            //MeshCollider mc = gameObject.GetComponent<MeshCollider>();
             //mc.sharedMesh = gameObject.GetComponent<SkinnedMeshRenderer>().sharedMesh;
             Debug.Log("fixing");
             //gameObject.GetComponent<MeshFilter>().mesh = gameObject.GetComponent<MeshFilter>().mesh;
@@ -27,13 +29,18 @@ public class MeshFix : MonoBehaviour {
             mc.sharedMesh = gameObject.GetComponent<MeshCollider>().sharedMesh;
             mc.convex = true;*/
 
-            meshRenderer = gameObject.GetComponent<SkinnedMeshRenderer>();
-            collider = gameObject.GetComponent<MeshCollider>();
-
-            Mesh colliderMesh = new Mesh();
-            meshRenderer.BakeMesh(colliderMesh);
-            collider.sharedMesh = null;
-            collider.sharedMesh = colliderMesh;
+            
         }
+    }
+
+    public void FixMyMeshCollider ()
+    {
+        meshRenderer = gameObject.GetComponent<SkinnedMeshRenderer>();
+        collider = gameObject.GetComponent<MeshCollider>();
+
+        Mesh colliderMesh = new Mesh();
+        meshRenderer.BakeMesh(colliderMesh);
+        collider.sharedMesh = null;
+        collider.sharedMesh = colliderMesh;
     }
 }
