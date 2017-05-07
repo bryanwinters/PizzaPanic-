@@ -27,6 +27,7 @@ public static class Constants : object {
 
     //layers
     public const string LAYER_PIZZA = "Pizza";
+    public const string LAYER_TOPPINGS = "Toppings";
     public const string LAYER_PIZZA_TOPPINGS = "PizzaTopping";
     public const string LAYER_TOPPING_CATCHER = "ToppingCatcher";
 

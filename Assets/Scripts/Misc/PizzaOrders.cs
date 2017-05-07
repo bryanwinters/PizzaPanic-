@@ -9,7 +9,7 @@ public class PizzaOrders : MonoBehaviour {
     enum ToppingAmounts { light = 0, regular, extra};
 
     PizzaClass CustomersPizza;
-    float PizzaScore = 100f;
+    int PizzaScore = 100;
 
     int minSpecialOrder = 0;
     int maxSpecialOrder = 8;
@@ -347,50 +347,51 @@ public class PizzaOrders : MonoBehaviour {
         CustomersPizza = pizza;
     }
 
-    public void ScorePizza ()
+    public int ScorePizza ()
     {
         //score sauce
-        Debug.LogWarning("Score sauce");
+        //Debug.LogWarning("Score sauce");
         toppingToCheck = CustomersPizza.ReturnSauceAmount();
         ScoreTopping(toppingToCheck, NoSauce, SauceAmount, LightSauce, MediumSauce, ExtraSauce);
         //score cheese
-        Debug.LogWarning("Score cheese");
+        //Debug.LogWarning("Score cheese");
         toppingToCheck = CustomersPizza.ReturnCheeseAmount();
         ScoreTopping(toppingToCheck, NoCheese, CheeseAmount, LightCheese, MediumCheese, ExtraCheese);
         //score pepperoni
-        Debug.LogWarning("Score pepperoni");
+        //Debug.LogWarning("Score pepperoni");
         toppingToCheck = CustomersPizza.ReturnPepperoniAmount();
         ScoreTopping(toppingToCheck, NoPepperoni, PepperoniAmount, LightPepperoni, MediumPepperoni, ExtraPepperoni);
         //score bacon
-        Debug.LogWarning("Score bacon");
+        //Debug.LogWarning("Score bacon");
         toppingToCheck = CustomersPizza.ReturnBaconAmount();
         ScoreTopping(toppingToCheck, NoBacon, BaconAmount, LightBacon, MediumBacon, ExtraBacon);
         //score anchovies
-        Debug.LogWarning("Score anchovies");
+        //Debug.LogWarning("Score anchovies");
         toppingToCheck = CustomersPizza.ReturnAnchoviesAmount();
         ScoreTopping(toppingToCheck, NoAnchovies, AnchoviesAmount, LightAnchovies, MediumAnchovies, ExtraAnchovies);
         //score green pepper
-        Debug.LogWarning("Score greenpepper");
+        //Debug.LogWarning("Score greenpepper");
         toppingToCheck = CustomersPizza.ReturnGreenPepperAmount();
         ScoreTopping(toppingToCheck, NoGreenPepper, GreenPepperAmount, LightGreenPepper, MediumGreenPepper, ExtraGreenPepper);
         //score mushroom
-        Debug.LogWarning("Score mushroom");
+        //Debug.LogWarning("Score mushroom");
         toppingToCheck = CustomersPizza.ReturnMushroomAmount();
         ScoreTopping(toppingToCheck, NoMushroom, MushroomAmount, LightMushroom, MediumMushroom, ExtraMushroom);
         //score hot pepper
-        Debug.LogWarning("Score hotpepper");
+        //Debug.LogWarning("Score hotpepper");
         toppingToCheck = CustomersPizza.ReturnHotPepperAmount();
         ScoreTopping(toppingToCheck, NoHotPepper, HotPepperAmount, LightHotPepper, MediumHotPepper, ExtraHotPepper);
         //score pineapple
-        Debug.LogWarning("Score pineapple");
+        //Debug.LogWarning("Score pineapple");
         toppingToCheck = CustomersPizza.ReturnPineappleAmount();
         ScoreTopping(toppingToCheck, NoPineapple, PineappleAmount, LightPineapple, MediumPineapple, ExtraPineapple);
         //score spinach
-        Debug.LogWarning("Score spinach");
+        //Debug.LogWarning("Score spinach");
         toppingToCheck = CustomersPizza.ReturnSpinachAmount();
         ScoreTopping(toppingToCheck, NoSpinach, SpinachAmount, LightSpinach, MediumSpinach, ExtraSpinach);
 
-        Debug.LogError("Pizza Score: " + PizzaScore);
+        //Debug.LogError("Pizza Score: " + PizzaScore);
+        return PizzaScore;
     }
 
     void ScoreTopping (int topp, bool isNotRequested, ToppingAmounts toppAmount, Vector2 lightTopps, Vector2 regularTopps, Vector2 extraTopps)
