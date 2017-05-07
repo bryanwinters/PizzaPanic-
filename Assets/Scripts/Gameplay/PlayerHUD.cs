@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+using TMPro;
 
 public class PlayerHUD : MonoBehaviour {
 
@@ -9,8 +10,24 @@ public class PlayerHUD : MonoBehaviour {
 
     [SerializeField] private Image _activeTopping;
     [SerializeField] private List<ToppingIcon> _toppingsList = new List<ToppingIcon>();
+    [SerializeField] private TextMeshProUGUI _ovenReadyText;
+
+    private CanvasGroup _canvasGroup;
 
     private int _currentTopping = 0;
+
+    private bool _ovenReady = false;
+    public bool OvenReady { get { return _ovenReady; } }
+
+    private void Awake ()
+    {
+        SetupVariables();
+    }
+
+    private void SetupVariables ()
+    {
+        _canvasGroup = this.GetComponent<CanvasGroup>();
+    }
 
     public void Init ()
     {
@@ -31,5 +48,18 @@ public class PlayerHUD : MonoBehaviour {
 
         _activeTopping.transform.position = _toppingsList[_currentTopping].IconImage.transform.position;
         return _toppingsList[_currentTopping].Topping;
+    }
+
+    public void EnableHud ()
+    {
+        _canvasGroup.alpha = 1f;
+    }
+
+    public void SetOvenState (bool ovenReady)
+    {        
+        _ovenReady = ovenReady;
+
+        string temp = (_ovenReady == true) ? Constants.HUD_OVEN_READY : Constants.HUD_OVEN_PREPPING_PIZZA;
+        _ovenReadyText.text = temp;
     }
 }

@@ -9,6 +9,7 @@ using UnityEngine;
 public class PlayerManager : MonoBehaviour, IManager {
 
     public System.Action OnPlayersReady;
+    public System.Action OnPizzaSubmitted;
 
     private static PlayerManager _instance;
     public static PlayerManager Instance
@@ -29,6 +30,7 @@ public class PlayerManager : MonoBehaviour, IManager {
 
     private List<int> _playersToSpawn = new List<int>();
     private int _playersReady;
+    private int _pizzasReady;
 
     private void Awake ()
     {
@@ -108,10 +110,30 @@ public class PlayerManager : MonoBehaviour, IManager {
         }
     }
 
+    private void HandleOvenReady (bool isReady)
+    {
+        if (GameManager.Instance.GameState == Constants.GameState.game)
+        {
+            int temp = (isReady == true) ? 1 : -1;
+            _pizzasReady = Mathf.Clamp(_pizzasReady + temp, 0, _activePlayers.Count); 
+
+            if (_pizzasReady == _activePlayers.Count)
+                SendPizzaSentEvent();
+        }
+    }
+
     private void SendReadyEvent ()
     {
         if (OnPlayersReady != null)
             OnPlayersReady();
+    }
+
+    private void SendPizzaSentEvent ()
+    {
+        _pizzasReady = 0;
+
+        if (OnPizzaSubmitted != null)
+            OnPizzaSubmitted();
     }
 
     private void SpawnPlayers ()
@@ -133,6 +155,7 @@ public class PlayerManager : MonoBehaviour, IManager {
                 Player p = Instantiate(prefab) as Player;
                 p.Init();
                 p.HandController.SetToPosition(Constants.SPAWN_POSITION[p.PlayerNumber - 1]);
+                p.OnOvenReady += HandleOvenReady;
                 _activePlayers.Add(p);
             }
             else

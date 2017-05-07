@@ -23,7 +23,7 @@ public static class Constants : object {
     public static float CONTROLLER_TRIGGER_DEAD_ZONE = 0.5f;
 
     //menu
-    public static int MENU_STARTING_TIME = 5;
+    public static int MENU_STARTING_TIME = 3;
 
     //STRINGS
     //input
@@ -37,9 +37,18 @@ public static class Constants : object {
     public const string CONTROLS_CYCLE_LEFT = "CycleLeft";
     public const string CONTROLS_OVEN_X = "OvenX";
 
+    //animation
+    public const string ANIMATION_PLAYER_IDLE = "Idle";
+    public const string ANIMATION_PLAYER_THROW = "Throw";
+    public const string ANIMATION_PLAYER_GRIP = "Grip";
+
     //menu
     public const string MENU_READY_PLAYERS = "Waiting For Players To Ready...";
     public const string MENU_GAME_STARTING = "Game Starting in ";
+
+    //hud
+    public const string HUD_OVEN_PREPPING_PIZZA = "Prepping Pizza";
+    public const string HUD_OVEN_READY = "Ready to Fire!";
 
     public static Vector2[] SPAWN_POSITION = new Vector2[]{new Vector2(-1,0), new Vector2(0,1), new Vector2(1,0), new Vector2(0,-1)};
 }

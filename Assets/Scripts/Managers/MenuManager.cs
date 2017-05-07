@@ -74,7 +74,10 @@ public class MenuManager : MonoBehaviour, IManager {
         foreach (PlayerHUD p in _playerHudElements)
         {
             if (p.CharacterType == player)
+            {
+                p.EnableHud();
                 return p;
+            }
         }
 
         return null;
