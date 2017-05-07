@@ -39,11 +39,10 @@ public class ToppingTossing : MonoBehaviour {
         }
 
 
-
         if(Input.GetKeyDown(KeyCode.Space))
         {
             //firetoppings
-            GameObject NewTopping = ObjectPooler.SharedInstance.GetTopping(currentTopping);
+            PizzaToppingUnifier NewTopping = ObjectPooler.SharedInstance.GetTopping(currentTopping);
             if( NewTopping != null )
             {
                 //for (int x = 0; x < 3; x++)
@@ -51,9 +50,9 @@ public class ToppingTossing : MonoBehaviour {
                     Vector3 spawnPos = gameObject.transform.position + Random.onUnitSphere * 0.6f;
                     NewTopping.transform.position = spawnPos;
                     //NewTopping.transform.rotation = gameObject.transform.rotation;
-                    NewTopping.SetActive(true);
+                    NewTopping.gameObject.SetActive(true);
                     //NewTopping.GetComponent<Rigidbody>().AddForce(gameObject.transform.right * -7f, ForceMode.Impulse);
-                    NewTopping.GetComponent<Rigidbody>().AddForce(gameObject.transform.right * Random.Range(minForce, maxForce), ForceMode.VelocityChange);
+                    NewTopping.Rigidbody.AddForce(gameObject.transform.right * Random.Range(minForce, maxForce), ForceMode.VelocityChange);
                 }
                 
             }

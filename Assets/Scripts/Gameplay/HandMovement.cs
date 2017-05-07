@@ -5,13 +5,22 @@ using UnityEngine;
 public class HandMovement : MonoBehaviour {
 
     private float _zOffset = 0f;
-    private float _speed = 0.4f;
+    private float _speed = 1f;
+
+    private float _speedMod = 2f;
+    private float _dashMod = 50f;
+    private float _dashCoolDown = 1f;
+
+    private bool _dashUsed = false;
+    public bool _dashAvailable = true;
 
     private CapsuleCollider _tableRef;
     private Player _playerRef;
 
     private string _controlsVertical;
     private string _controlsHorizontal;
+    private string _controlsDash;
+    private string _controlsAction;
 
     private void Awake () 
     {
@@ -34,6 +43,8 @@ public class HandMovement : MonoBehaviour {
     {
         _controlsVertical = Constants.CONTROLS_VERTICAL + _playerRef.PlayerNumber;
         _controlsHorizontal = Constants.CONTROLS_HORIZONTAL + _playerRef.PlayerNumber;
+        _controlsDash = Constants.CONTROLS_DASH + _playerRef.PlayerNumber;
+        _controlsAction = Constants.CONTROLS_ACTION + _playerRef.PlayerNumber;
     }
 
     public void SetToPosition (Vector2 axis)
@@ -60,12 +71,24 @@ public class HandMovement : MonoBehaviour {
         if(step > 1.0f) transform.RotateAround(point, axis,
             rotateAmount * (1.0f - lastStep));
     }
+
+    private IEnumerator UseDash ()
+    {
+        _dashUsed = true;
+        _dashAvailable = false;
+
+        yield return new WaitForSeconds(_dashCoolDown);
+
+        _dashUsed = false;
+    }
 	
 	// Update is called once per frame
 	void Update () 
     {
         if (GameManager.Instance.GameState == Constants.GameState.game)
         {
+            //speed mod
+
             float vertical = Input.GetAxis(_controlsVertical);
             float horizontal = Input.GetAxis(_controlsHorizontal);
 
@@ -80,9 +103,41 @@ public class HandMovement : MonoBehaviour {
 //
 //        transform.position = Vector3.Lerp(this.transform.position, target, Time.deltaTime);
 
+            //BOOSTING
+            float dashMod = 1f;
+
+            //reset dash if trigger not down
+            if ((Input.GetAxis(_controlsDash) <= Constants.CONTROLLER_TRIGGER_DEAD_ZONE &&
+                Input.GetAxis(_controlsDash) >= -Constants.CONTROLLER_TRIGGER_DEAD_ZONE) && 
+                _dashUsed == false && _dashAvailable == false)
+            {
+                _dashAvailable = true;
+            }
+
+
+            if ((Input.GetAxis(_controlsDash) >= Constants.CONTROLLER_TRIGGER_DEAD_ZONE ||
+                Input.GetAxis(_controlsDash) <= -Constants.CONTROLLER_TRIGGER_DEAD_ZONE) && 
+                _dashUsed == false && _dashAvailable == true)
+            {
+                StartCoroutine(UseDash());
+                dashMod = _dashMod*Mathf.Abs(Input.GetAxis(_controlsDash));
+            }
+
+            float rotAmount = horizontal * _speedMod * dashMod;
+
             //RELATIVE CONTROLS
             //transform.RotateAround(_tableRef.transform.position, Vector3.down, horizontal * 2f);
-            StartCoroutine(RotateObject(_tableRef.transform.position, Vector3.down, horizontal, _speed));
+            StartCoroutine(RotateObject(_tableRef.transform.position, Vector3.down, rotAmount, _speed));
+
+            //ACTION
+            if (Input.GetButtonDown(_controlsAction))
+            {
+                if(_playerRef.ActiveTopping == Constants.Toppings.dough)
+                    _playerRef.PlayAnimation(Constants.ANIMATION_PLAYER_GRIP);
+                else
+                    _playerRef.PlayAnimation(Constants.ANIMATION_PLAYER_THROW);
+            }
+ 
         }
 	}
 }

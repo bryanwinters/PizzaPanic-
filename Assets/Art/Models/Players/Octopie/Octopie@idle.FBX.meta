@@ -1,0 +1,175 @@
+fileFormatVersion: 2
+guid: 433ce6024c029e94fa0a934c1c8f6a65
+timeCreated: 1494127397
+licenseType: Free
+ModelImporter:
+  serializedVersion: 19
+  fileIDToRecycleName:
+    100000: b_Base
+    100002: b_L_1
+    100004: b_L_2
+    100006: b_L_3
+    100008: b_L_4
+    100010: b_L_5
+    100012: b_L_end
+    100014: b_L_tip
+    100016: b_R_1
+    100018: b_R_2
+    100020: b_R_3
+    100022: b_R_4
+    100024: b_R_5
+    100026: b_R_end
+    100028: b_R_tip
+    100030: //RootNode
+    100032: Octopie_ROOT
+    400000: b_Base
+    400002: b_L_1
+    400004: b_L_2
+    400006: b_L_3
+    400008: b_L_4
+    400010: b_L_5
+    400012: b_L_end
+    400014: b_L_tip
+    400016: b_R_1
+    400018: b_R_2
+    400020: b_R_3
+    400022: b_R_4
+    400024: b_R_5
+    400026: b_R_end
+    400028: b_R_tip
+    400030: //RootNode
+    400032: Octopie_ROOT
+    7400000: idle
+    9500000: //RootNode
+  materials:
+    importMaterials: 1
+    materialName: 0
+    materialSearch: 1
+  animations:
+    legacyGenerateAnimations: 4
+    bakeSimulation: 0
+    resampleCurves: 1
+    optimizeGameObjects: 0
+    motionNodeName: 
+    rigImportErrors: 
+    rigImportWarnings: 
+    animationImportErrors: 
+    animationImportWarnings: 
+    animationRetargetingWarnings: 
+    animationDoRetargetingWarnings: 0
+    animationCompression: 1
+    animationRotationError: 0.5
+    animationPositionError: 0.5
+    animationScaleError: 0.5
+    animationWrapMode: 0
+    extraExposedTransformPaths: []
+    clipAnimations:
+    - serializedVersion: 16
+      name: idle
+      takeName: Take 001
+      firstFrame: 0
+      lastFrame: 40
+      wrapMode: 0
+      orientationOffsetY: 0
+      level: 0
+      cycleOffset: 0
+      loop: 0
+      hasAdditiveReferencePose: 0
+      loopTime: 1
+      loopBlend: 0
+      loopBlendOrientation: 0
+      loopBlendPositionY: 0
+      loopBlendPositionXZ: 0
+      keepOriginalOrientation: 0
+      keepOriginalPositionY: 1
+      keepOriginalPositionXZ: 0
+      heightFromFeet: 0
+      mirror: 0
+      bodyMask: 01000000010000000100000001000000010000000100000001000000010000000100000001000000010000000100000001000000
+      curves: []
+      events: []
+      transformMask:
+      - path: 
+        weight: 1
+      - path: b_Base
+        weight: 1
+      - path: b_Base/b_L_end
+        weight: 1
+      - path: b_Base/b_L_end/b_L_1
+        weight: 1
+      - path: b_Base/b_L_end/b_L_1/b_L_2
+        weight: 1
+      - path: b_Base/b_L_end/b_L_1/b_L_2/b_L_3
+        weight: 1
+      - path: b_Base/b_L_end/b_L_1/b_L_2/b_L_3/b_L_4
+        weight: 1
+      - path: b_Base/b_L_end/b_L_1/b_L_2/b_L_3/b_L_4/b_L_5
+        weight: 1
+      - path: b_Base/b_L_end/b_L_1/b_L_2/b_L_3/b_L_4/b_L_5/b_L_tip
+        weight: 1
+      - path: b_Base/b_R_end
+        weight: 1
+      - path: b_Base/b_R_end/b_R_1
+        weight: 1
+      - path: b_Base/b_R_end/b_R_1/b_R_2
+        weight: 1
+      - path: b_Base/b_R_end/b_R_1/b_R_2/b_R_3
+        weight: 1
+      - path: b_Base/b_R_end/b_R_1/b_R_2/b_R_3/b_R_4
+        weight: 1
+      - path: b_Base/b_R_end/b_R_1/b_R_2/b_R_3/b_R_4/b_R_5
+        weight: 1
+      - path: b_Base/b_R_end/b_R_1/b_R_2/b_R_3/b_R_4/b_R_5/b_R_tip
+        weight: 1
+      - path: Octopie_ROOT
+        weight: 1
+      maskType: 3
+      maskSource: {instanceID: 0}
+      additiveReferencePoseFrame: 0
+    isReadable: 1
+  meshes:
+    lODScreenPercentages: []
+    globalScale: 1
+    meshCompression: 0
+    addColliders: 0
+    importBlendShapes: 1
+    swapUVChannels: 0
+    generateSecondaryUV: 0
+    useFileUnits: 1
+    optimizeMeshForGPU: 1
+    keepQuads: 0
+    weldVertices: 1
+    secondaryUVAngleDistortion: 8
+    secondaryUVAreaDistortion: 15.000001
+    secondaryUVHardAngle: 88
+    secondaryUVPackMargin: 4
+    useFileScale: 1
+  tangentSpace:
+    normalSmoothAngle: 60
+    normalImportMode: 0
+    tangentImportMode: 3
+  importAnimation: 1
+  copyAvatar: 0
+  humanDescription:
+    serializedVersion: 2
+    human: []
+    skeleton: []
+    armTwist: 0.5
+    foreArmTwist: 0.5
+    upperLegTwist: 0.5
+    legTwist: 0.5
+    armStretch: 0.05
+    legStretch: 0.05
+    feetSpacing: 0
+    rootMotionBoneName: 
+    rootMotionBoneRotation: {x: 0, y: 0, z: 0, w: 1}
+    hasTranslationDoF: 0
+    hasExtraRoot: 0
+    skeletonHasParents: 1
+  lastHumanDescriptionAvatarSource: {instanceID: 0}
+  animationType: 2
+  humanoidOversampling: 1
+  additionalBone: 0
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 

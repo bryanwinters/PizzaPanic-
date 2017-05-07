@@ -47,7 +47,7 @@ public class GameManager : MonoBehaviour {
 
     private void SetupVariables ()
     {
-        DontDestroyOnLoad(this);
+        //DontDestroyOnLoad(this);
         _managers = this.GetComponents<IManager>().ToList();
     }
 

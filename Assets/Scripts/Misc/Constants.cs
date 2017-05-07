@@ -16,14 +16,19 @@ public static class Constants : object {
     public static int MAX_PLAYERS = 4;
 
     //gameplay
-    public static float PLAYER_SPAWN_OFFSET = 29f;
+    public static float PLAYER_SPAWN_OFFSET = 5f;
     public static int GAME_STARTING_TIME = 120;
 
     //controls
     public static float CONTROLLER_TRIGGER_DEAD_ZONE = 0.5f;
 
     //menu
-    public static int MENU_STARTING_TIME = 5;
+    public static int MENU_STARTING_TIME = 3;
+
+    //layers
+    public const string LAYER_PIZZA = "Pizza";
+    public const string LAYER_PIZZA_TOPPINGS = "PizzaTopping";
+    public const string LAYER_TOPPING_CATCHER = "ToppingCatcher";
 
     //STRINGS
     //input
@@ -37,9 +42,18 @@ public static class Constants : object {
     public const string CONTROLS_CYCLE_LEFT = "CycleLeft";
     public const string CONTROLS_OVEN_X = "OvenX";
 
+    //animation
+    public const string ANIMATION_PLAYER_IDLE = "Idle";
+    public const string ANIMATION_PLAYER_THROW = "Throw";
+    public const string ANIMATION_PLAYER_GRIP = "Grip";
+
     //menu
     public const string MENU_READY_PLAYERS = "Waiting For Players To Ready...";
     public const string MENU_GAME_STARTING = "Game Starting in ";
+
+    //hud
+    public const string HUD_OVEN_PREPPING_PIZZA = "Prepping Pizza";
+    public const string HUD_OVEN_READY = "Ready to Fire!";
 
     public static Vector2[] SPAWN_POSITION = new Vector2[]{new Vector2(-1,0), new Vector2(0,1), new Vector2(1,0), new Vector2(0,-1)};
 }

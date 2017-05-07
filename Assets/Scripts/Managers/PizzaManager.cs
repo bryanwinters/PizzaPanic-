@@ -45,6 +45,7 @@ public class PizzaManager : MonoBehaviour, IManager {
         if( currentPizzaObject != null ) //not first run
         {
             //store old pizza
+            currentPizzaObject.gameObject.GetComponent<PizzaOrders>().ScorePizza();
             PizzaList.Add(currentPizza);
             PizzaObjects.Add(currentPizzaObject);
             currentPizzaObject.transform.position = new Vector3(0, 0, 20f);
@@ -53,6 +54,7 @@ public class PizzaManager : MonoBehaviour, IManager {
         {
         }
 
+        //_BW TODO addcomponenet/getcomponent all expensive at runtime - especially in UPDATE
         currentPizzaObject = (GameObject)Instantiate(dough, Vector3.zero, Quaternion.identity);
         currentPizzaObject.gameObject.AddComponent<PizzaOrders>();
         currentPizzaObject.gameObject.GetComponent<PizzaOrders>().CreateOrder();

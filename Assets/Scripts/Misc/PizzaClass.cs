@@ -86,4 +86,47 @@ public class PizzaClass : MonoBehaviour {
             pineappleAmount += amount;
         }       
     }
+
+    public int ReturnDoughSize()
+    {
+        return doughSize;
+    }
+
+    public int ReturnSauceAmount()
+    {
+        return sauceAmount;
+    }
+    public int ReturnCheeseAmount ()
+    {
+        return cheeseAmount;
+    }
+    public int ReturnPepperoniAmount()
+    {
+        return pepperoniAmount;
+    }
+    public int ReturnBaconAmount ()
+    {
+        return baconAmount;
+    }
+    public int ReturnAnchoviesAmount ()
+    {
+        return anchoviesAmount;
+    }
+    public int ReturnGreenPepperAmount ()
+    {
+        return greenPepperAmount;
+    }
+    public int ReturnMushroomAmount ()
+    {
+        return mushroomAmount;
+    }
+    public int ReturnHotPepperAmount ()
+    {
+        return hotPepperAmount;
+    }
+    public int ReturnPineappleAmount ()
+    {
+        return pineappleAmount;
+    }
+    
 }
