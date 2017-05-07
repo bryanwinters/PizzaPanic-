@@ -81,7 +81,7 @@ public class PizzaToppingUnifier : MonoBehaviour {
         else if( MyTopping == Constants.Toppings.sauce)
         {
             Vector3 tempvec = gameObject.transform.position;
-            tempvec.y = 0.14f;
+            tempvec.y -= 0.04f;
             gameObject.transform.position = tempvec;
             //gameObject.transform.localScale = new Vector3(0.12f, 0.12f, 0.06f);
 

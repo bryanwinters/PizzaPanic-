@@ -11,6 +11,7 @@ public class PizzaManager : MonoBehaviour, IManager {
         SharedInstance = this;
     }
 
+    public Transform DoughSpawnPoint;
 
     List<PizzaOrders> OrderList;
     public GameObject dough;
@@ -19,6 +20,7 @@ public class PizzaManager : MonoBehaviour, IManager {
     GameObject currentPizzaObject;
     PizzaClass currentPizza;
     PizzaOrders theOrder;
+    public PizzaOrders TheOrder { get { return theOrder; } }
 
     List<int> TotalPizzaScores = new List<int>(); //receives all of the pizza scores for averaging and finding highest/lowest
 
@@ -29,9 +31,30 @@ public class PizzaManager : MonoBehaviour, IManager {
 
 
 	// Use this for initialization
-	void Start () {
-		
+	void Start () 
+    {
+        SubscribeToEvents();
 	}
+
+    private void SubscribeToEvents ()
+    {
+        GameManager.Instance.OnGameStateChanged += HandleGameStateChanged;
+        PlayerManager.Instance.OnPizzaSubmitted += NewPizza;
+    }
+
+    private void UnsubscribeToEvents ()
+    {
+        GameManager.Instance.OnGameStateChanged -= HandleGameStateChanged;
+        PlayerManager.Instance.OnPizzaSubmitted -= NewPizza;
+    }
+
+    private void HandleGameStateChanged(Constants.GameState state)
+    {
+        if (state == Constants.GameState.game)
+        {
+            NewPizza();
+        }
+    }
 	
 	// Update is called once per frame
 	void Update ()
@@ -59,7 +82,8 @@ public class PizzaManager : MonoBehaviour, IManager {
         }
 
         //_BW TODO addcomponenet/getcomponent all expensive at runtime - especially in UPDATE
-        currentPizzaObject = (GameObject)Instantiate(dough, Vector3.zero, Quaternion.identity);
+        currentPizzaObject = (GameObject)Instantiate(dough, DoughSpawnPoint.position, Quaternion.identity);
+        currentPizzaObject.transform.localScale = new Vector3(2.5f, 1f, 2.5f);
         theOrder = currentPizzaObject.gameObject.AddComponent<PizzaOrders>();
         theOrder.CreateOrder();
         //_ME cleaned up this a bit

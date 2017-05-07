@@ -43,6 +43,7 @@ public class GameManager : MonoBehaviour {
     private void SubscribeToEvents ()
     {
         PlayerManager.Instance.OnPlayersReady += HandleOnPlayersReady;
+        MenuManager.Instance.HUD.OnTimerComplete += HandleTimerComplete;
     }
 
     private void SetupVariables ()
@@ -75,6 +76,11 @@ public class GameManager : MonoBehaviour {
     private void HandleOnPlayersReady ()
     {
         StartCoroutine(StartGame());
+    }
+
+    private void HandleTimerComplete ()
+    {
+        SetGameState(Constants.GameState.end);
     }
 	
     private IEnumerator StartGame ()
