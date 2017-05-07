@@ -6,7 +6,7 @@ public static class Constants : object {
 
     //ENUMS
     public enum Toppings {dough = 0, sauce = 1, cheese = 2, pepperoni = 3, bacon = 4, anchovies = 5, greenPepper = 6,
-        mushroom = 7, hotPepper = 8, pineapple = 9}
+        mushroom = 7, hotPepper = 8, pineapple = 9, spinach = 10}
     public enum Characters {meowzzarella = 0, octopie = 1, crustodile = 2, bonemando = 3}
     public enum GameState {menu = 0, starting = 1, game = 2, end = 3}
 
