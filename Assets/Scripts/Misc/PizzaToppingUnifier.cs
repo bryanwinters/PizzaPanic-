@@ -9,26 +9,30 @@ public class PizzaToppingUnifier : MonoBehaviour {
 
     bool AddedAlready = false;
 
+    private Rigidbody _rigidbody;
+    public Rigidbody Rigidbody { get { return _rigidbody; } }
+
 	// Use this for initialization
-	void Start () {
-		
+	private void Awake () 
+    {
+        SetupVariables();
 	}
 	
-	// Update is called once per frame
-	void Update () {
-		
+    private void SetupVariables () 
+    {
+        _rigidbody = this.GetComponent<Rigidbody>();
 	}
 
 
     void OnCollisionEnter ( Collision c)
     {
-        if( c.gameObject.layer == LayerMask.NameToLayer("Pizza"))
+        if( c.gameObject.layer == LayerMask.NameToLayer(Constants.LAYER_PIZZA))
         {
             //become one;
             gameObject.transform.parent = c.transform.root;
-            gameObject.layer = LayerMask.NameToLayer("PizzaTopping");
-            gameObject.GetComponent<Rigidbody>().isKinematic = true;
-            gameObject.GetComponent<Rigidbody>().useGravity = false;
+            gameObject.layer = LayerMask.NameToLayer(Constants.LAYER_PIZZA_TOPPINGS);
+            _rigidbody.isKinematic = true;
+            _rigidbody.useGravity = false;
 
             if(!AddedAlready)
             {
@@ -37,22 +41,23 @@ public class PizzaToppingUnifier : MonoBehaviour {
             }
             
         }
-        else if( c.gameObject.layer == LayerMask.NameToLayer("PizzaTopping"))
-        {
-            //become one;
-            gameObject.transform.parent = c.transform.root;
-            gameObject.layer = LayerMask.NameToLayer("PizzaTopping");
-            gameObject.GetComponent<Rigidbody>().isKinematic = true;
-            gameObject.GetComponent<Rigidbody>().useGravity = false;
-
-            if( !AddedAlready )
-            {
-                AddSelfToPizza();
-                AddedAlready = true;
-            }
-            
-        }
-        else if(c.gameObject.layer == LayerMask.NameToLayer("ToppingCatcher"))
+        //_BW TODO what does this do?? toppings collide with each other??
+//        else if( c.gameObject.layer == LayerMask.NameToLayer(Constants.LAYER_PIZZA_TOPPINGS))
+//        {
+//            //become one;
+//            gameObject.transform.parent = c.transform.root;
+//            gameObject.layer = LayerMask.NameToLayer(Constants.LAYER_PIZZA_TOPPINGS);
+//            _rigidbody.isKinematic = true;
+//            _rigidbody.useGravity = false;
+//
+//            if( !AddedAlready )
+//            {
+//                AddSelfToPizza();
+//                AddedAlready = true;
+//            }
+//            
+//        }
+        else if(c.gameObject.layer == LayerMask.NameToLayer(Constants.LAYER_TOPPING_CATCHER))
         {
             gameObject.SetActive(false);
         }
@@ -69,14 +74,14 @@ public class PizzaToppingUnifier : MonoBehaviour {
             Vector3 tempvec = gameObject.transform.position;
             tempvec.y = 0.14f;
             gameObject.transform.position = tempvec;
-            gameObject.transform.localScale = new Vector3(0.12f, 0.12f, 0.06f);
+            //gameObject.transform.localScale = new Vector3(0.12f, 0.12f, 0.06f);
 
             if (!AddedAlready)
             {
                 AddedAlready = true;
                 PizzaManager.SharedInstance.AddTopping(MyTopping);
             }
-            //gameObject.transform.DOScale(new Vector3(0.12f, 0.12f, 0.06f), 0.5f);
+            gameObject.transform.DOScale(new Vector3(0.12f, 0.12f, 0.06f), 0.5f);
         }
         else
         {

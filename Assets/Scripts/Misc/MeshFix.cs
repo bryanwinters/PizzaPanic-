@@ -16,6 +16,7 @@ public class MeshFix : MonoBehaviour {
 	void Update () {
         if (Input.GetKeyDown(KeyCode.T))
         {
+            //_BW TODO addcomponenet/getcomponent all expensive at runtime - especially in UPDATE
             MeshCollider mc = gameObject.GetComponent<MeshCollider>();
             //mc.sharedMesh = gameObject.GetComponent<SkinnedMeshRenderer>().sharedMesh;
             Debug.Log("fixing");
