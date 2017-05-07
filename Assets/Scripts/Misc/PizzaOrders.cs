@@ -94,6 +94,9 @@ public class PizzaOrders : MonoBehaviour {
         Debug.Log("Order Incoming!");
         int size = Random.Range(1, 4);
         PizzaOrderSize = (Constants.PizzaSizes)size;
+
+        MenuManager.Instance.HUD.HandleNewPizza(Constants.Toppings.dough, size);
+
         Debug.Log(PizzaOrderSize.ToString() + " pizza.");
 
         int sauceMyPizza = Random.Range(0, 10);
@@ -101,6 +104,7 @@ public class PizzaOrders : MonoBehaviour {
         {
             //nosauce
             Debug.Log("NO SAUCE.");
+            MenuManager.Instance.HUD.HandleNewPizza(Constants.Toppings.sauce, 0);
         }
         else
         {
@@ -110,16 +114,19 @@ public class PizzaOrders : MonoBehaviour {
             {
                 SauceAmount = ToppingAmounts.light;
                 Debug.Log("Light Sauce.");
+                MenuManager.Instance.HUD.HandleNewPizza(Constants.Toppings.sauce, 1);
             }
             else if( sauceOrder >= maxSpecialOrder )
             {
                 SauceAmount = ToppingAmounts.extra;
                 Debug.Log("Extra Sauce.");
+                MenuManager.Instance.HUD.HandleNewPizza(Constants.Toppings.sauce, 3);
             }
             else
             {
                 SauceAmount = ToppingAmounts.regular;
                 Debug.Log("Regular Sauce.");
+                MenuManager.Instance.HUD.HandleNewPizza(Constants.Toppings.sauce, 2);
             }
         }
 
@@ -129,6 +136,7 @@ public class PizzaOrders : MonoBehaviour {
         {
             //nocheese
             Debug.Log("NO CHEESE!");
+            MenuManager.Instance.HUD.HandleNewPizza(Constants.Toppings.cheese, 0);
         }
         else
         {
@@ -138,16 +146,19 @@ public class PizzaOrders : MonoBehaviour {
             {
                 CheeseAmount = ToppingAmounts.light;
                 Debug.Log("Light Cheese.");
+                MenuManager.Instance.HUD.HandleNewPizza(Constants.Toppings.cheese, 1);
             }
             else if (cheeseOrder >= maxSpecialOrder)
             {
                 CheeseAmount = ToppingAmounts.extra;
                 Debug.Log("Extra Cheese.");
+                MenuManager.Instance.HUD.HandleNewPizza(Constants.Toppings.cheese, 3);
             }
             else
             {
                 CheeseAmount = ToppingAmounts.regular;
                 Debug.Log("Regular Cheese.");
+                MenuManager.Instance.HUD.HandleNewPizza(Constants.Toppings.cheese, 2);
             }
         }
 
@@ -172,6 +183,15 @@ public class PizzaOrders : MonoBehaviour {
 
         int ToppingsOrderCounter = 0;
 
+        MenuManager.Instance.HUD.HandleNewPizza(Constants.Toppings.pepperoni, 0);
+        MenuManager.Instance.HUD.HandleNewPizza(Constants.Toppings.bacon, 0);
+        MenuManager.Instance.HUD.HandleNewPizza(Constants.Toppings.anchovies, 0);
+        MenuManager.Instance.HUD.HandleNewPizza(Constants.Toppings.pineapple, 0);
+        MenuManager.Instance.HUD.HandleNewPizza(Constants.Toppings.greenPepper, 0);
+        MenuManager.Instance.HUD.HandleNewPizza(Constants.Toppings.hotPepper, 0);
+        MenuManager.Instance.HUD.HandleNewPizza(Constants.Toppings.mushroom, 0);
+        MenuManager.Instance.HUD.HandleNewPizza(Constants.Toppings.spinach, 0);
+
         for (int x = 0; x < NumberOfToppings; x++)
         {
             if( RandomToppings[x] == 0 )
@@ -183,15 +203,18 @@ public class PizzaOrders : MonoBehaviour {
                 {
                     PepperoniAmount = ToppingAmounts.light;
                     Debug.Log("Light Pepperoni.");
+                    MenuManager.Instance.HUD.HandleNewPizza(Constants.Toppings.pepperoni, 1);
                 }
                 else if (specialOrder >= maxSpecialOrder)
                 {
                     PepperoniAmount = ToppingAmounts.extra;
                     Debug.Log("Extra Pepperoni.");
+                    MenuManager.Instance.HUD.HandleNewPizza(Constants.Toppings.pepperoni, 3);
                 }
                 else
                 {
                     Debug.Log("Pepperoni.");
+                    MenuManager.Instance.HUD.HandleNewPizza(Constants.Toppings.pepperoni, 2);
                 }
             }
             else if (RandomToppings[x] == 1)
@@ -203,15 +226,18 @@ public class PizzaOrders : MonoBehaviour {
                 {
                     BaconAmount = ToppingAmounts.light;
                     Debug.Log("Light Bacon.");
+                    MenuManager.Instance.HUD.HandleNewPizza(Constants.Toppings.bacon, 1);
                 }
                 else if (specialOrder >= maxSpecialOrder)
                 {
                     BaconAmount = ToppingAmounts.extra;
                     Debug.Log("Extra Bacon.");
+                    MenuManager.Instance.HUD.HandleNewPizza(Constants.Toppings.bacon, 3);
                 }
                 else
                 {
                     Debug.Log("Bacon.");
+                    MenuManager.Instance.HUD.HandleNewPizza(Constants.Toppings.bacon, 2);
                 }
             }
             else if (RandomToppings[x] == 2)
@@ -223,15 +249,18 @@ public class PizzaOrders : MonoBehaviour {
                 {
                     AnchoviesAmount = ToppingAmounts.light;
                     Debug.Log("Light Anchovies.");
+                    MenuManager.Instance.HUD.HandleNewPizza(Constants.Toppings.anchovies, 1);
                 }
                 else if (specialOrder >= maxSpecialOrder)
                 {
                     AnchoviesAmount = ToppingAmounts.extra;
                     Debug.Log("Extra Anchovies.");
+                    MenuManager.Instance.HUD.HandleNewPizza(Constants.Toppings.anchovies, 3);
                 }
                 else
                 {
                     Debug.Log("Anchovies.");
+                    MenuManager.Instance.HUD.HandleNewPizza(Constants.Toppings.anchovies, 2);
                 }
             }
             else if (RandomToppings[x] == 3)
@@ -243,15 +272,18 @@ public class PizzaOrders : MonoBehaviour {
                 {
                     GreenPepperAmount = ToppingAmounts.light;
                     Debug.Log("Light GreenPepper.");
+                    MenuManager.Instance.HUD.HandleNewPizza(Constants.Toppings.greenPepper, 1);
                 }
                 else if (specialOrder >= maxSpecialOrder)
                 {
                     GreenPepperAmount = ToppingAmounts.extra;
                     Debug.Log("Extra GreenPepper.");
+                    MenuManager.Instance.HUD.HandleNewPizza(Constants.Toppings.greenPepper, 3);
                 }
                 else
                 {
                     Debug.Log("GreenPepper.");
+                    MenuManager.Instance.HUD.HandleNewPizza(Constants.Toppings.greenPepper, 2);
                 }
             }
             else if (RandomToppings[x] == 4)
@@ -263,15 +295,18 @@ public class PizzaOrders : MonoBehaviour {
                 {
                     MushroomAmount = ToppingAmounts.light;
                     Debug.Log("Light Mushroom.");
+                    MenuManager.Instance.HUD.HandleNewPizza(Constants.Toppings.mushroom, 1);
                 }
                 else if (specialOrder >= maxSpecialOrder)
                 {
                     MushroomAmount = ToppingAmounts.extra;
                     Debug.Log("Extra Mushroom.");
+                    MenuManager.Instance.HUD.HandleNewPizza(Constants.Toppings.mushroom, 3);
                 }
                 else
                 {
                     Debug.Log("Mushroom.");
+                    MenuManager.Instance.HUD.HandleNewPizza(Constants.Toppings.mushroom, 2);
                 }
             }
             else if (RandomToppings[x] == 5)
@@ -283,15 +318,18 @@ public class PizzaOrders : MonoBehaviour {
                 {
                     HotPepperAmount = ToppingAmounts.light;
                     Debug.Log("Light HotPepper.");
+                    MenuManager.Instance.HUD.HandleNewPizza(Constants.Toppings.hotPepper, 1);
                 }
                 else if (specialOrder >= maxSpecialOrder)
                 {
                     HotPepperAmount = ToppingAmounts.extra;
                     Debug.Log("Extra HotPepper.");
+                    MenuManager.Instance.HUD.HandleNewPizza(Constants.Toppings.hotPepper, 3);
                 }
                 else
                 {
                     Debug.Log("HotPepper.");
+                    MenuManager.Instance.HUD.HandleNewPizza(Constants.Toppings.hotPepper, 2);
                 }
             }
             else if (RandomToppings[x] == 6)
@@ -303,15 +341,18 @@ public class PizzaOrders : MonoBehaviour {
                 {
                     PineappleAmount = ToppingAmounts.light;
                     Debug.Log("Light Pineapple.");
+                    MenuManager.Instance.HUD.HandleNewPizza(Constants.Toppings.pineapple, 1);
                 }
                 else if (specialOrder >= maxSpecialOrder)
                 {
                     PineappleAmount = ToppingAmounts.extra;
                     Debug.Log("Extra Pineapple.");
+                    MenuManager.Instance.HUD.HandleNewPizza(Constants.Toppings.pineapple, 3);
                 }
                 else
                 {
                     Debug.Log("Pineapple.");
+                    MenuManager.Instance.HUD.HandleNewPizza(Constants.Toppings.pineapple, 2);
                 }
             }
             else if (RandomToppings[x] == 7)
@@ -323,15 +364,18 @@ public class PizzaOrders : MonoBehaviour {
                 {
                     SpinachAmount = ToppingAmounts.light;
                     Debug.Log("Light Spinach.");
+                    MenuManager.Instance.HUD.HandleNewPizza(Constants.Toppings.spinach, 1);
                 }
                 else if (specialOrder >= maxSpecialOrder)
                 {
                     SpinachAmount = ToppingAmounts.extra;
                     Debug.Log("Extra Spinach.");
+                    MenuManager.Instance.HUD.HandleNewPizza(Constants.Toppings.spinach, 3);
                 }
                 else
                 {
                     Debug.Log("Spinach.");
+                    MenuManager.Instance.HUD.HandleNewPizza(Constants.Toppings.spinach, 2);
                 }
             }
             else
@@ -396,7 +440,7 @@ public class PizzaOrders : MonoBehaviour {
         ScoreTopping(toppingToCheck, NoSpinach, SpinachAmount, LightSpinach, MediumSpinach, ExtraSpinach);
 
         //Debug.LogError("Pizza Score: " + PizzaScore);
-        return PizzaScore;
+        return Mathf.Clamp(PizzaScore, 0, 100);
     }
 
     void ScoreTopping (int topp, bool isNotRequested, ToppingAmounts toppAmount, Vector2 lightTopps, Vector2 regularTopps, Vector2 extraTopps)

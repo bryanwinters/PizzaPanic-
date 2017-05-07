@@ -12,6 +12,8 @@ public class PizzaToppingUnifier : MonoBehaviour {
     private Rigidbody _rigidbody;
     public Rigidbody Rigidbody { get { return _rigidbody; } }
 
+    private Vector3 _startScale;
+
 	// Use this for initialization
 	private void Awake () 
     {
@@ -21,6 +23,7 @@ public class PizzaToppingUnifier : MonoBehaviour {
     private void SetupVariables () 
     {
         _rigidbody = this.GetComponent<Rigidbody>();
+        _startScale = this.transform.localScale;
 	}
 
 
@@ -70,6 +73,7 @@ public class PizzaToppingUnifier : MonoBehaviour {
         _rigidbody.isKinematic = false;
         _rigidbody.useGravity = true;
         AddedAlready = false;
+        this.transform.localScale = _startScale;
         Debug.Log("repooled");
     }
     void AddSelfToPizza()

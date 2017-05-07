@@ -15,6 +15,7 @@ public class ToppingIcon
 public class MenuManager : MonoBehaviour, IManager {
 
     public List<ToppingIcon> Toppings = new List<ToppingIcon>();
+    public List<Constants.Toppings> AvailableToppingsForPlayers = new List<Constants.Toppings>();
     public MenuHUD HUD;
 
     private static MenuManager _instance;
@@ -79,6 +80,9 @@ public class MenuManager : MonoBehaviour, IManager {
 
         ToppingIcon t = _playersToppingPool[ran];
         _playersToppingPool.Remove(t);
+
+        AvailableToppingsForPlayers.Add(t.Topping);
+
         return t;
     }
 
