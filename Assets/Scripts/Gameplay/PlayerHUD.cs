@@ -32,8 +32,14 @@ public class PlayerHUD : MonoBehaviour {
     public void Init ()
     {
         //get dough,cheese,sauce + 2 random and pull from MenuManager.Instance.Topping to populate data
-
-       
+        List<ToppingIcon> temp = new List<ToppingIcon>(_toppingsList);
+        for (int i = 3; i < temp.Count; i++)
+        {
+            ToppingIcon t = MenuManager.Instance.GetUnusedTopping();
+            _toppingsList[i].IconSprite = t.IconSprite;
+            _toppingsList[i].Topping = t.Topping;
+            _toppingsList[i].IconImage.sprite = t.IconSprite;
+        }       
     }
 
     public Constants.Toppings CycleToppings (int dir)
