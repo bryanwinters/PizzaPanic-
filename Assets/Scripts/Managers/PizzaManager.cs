@@ -18,6 +18,9 @@ public class PizzaManager : MonoBehaviour, IManager {
     List<GameObject> PizzaObjects = new List<GameObject>();
     GameObject currentPizzaObject;
     PizzaClass currentPizza;
+    PizzaOrders theOrder;
+
+    List<int> TotalPizzaScores = new List<int>(); //receives all of the pizza scores for averaging and finding highest/lowest
 
     public void Init()
     {
@@ -45,10 +48,11 @@ public class PizzaManager : MonoBehaviour, IManager {
         if( currentPizzaObject != null ) //not first run
         {
             //store old pizza
-            currentPizzaObject.gameObject.GetComponent<PizzaOrders>().ScorePizza();
+            TotalPizzaScores.Add(theOrder.ScorePizza());
             PizzaList.Add(currentPizza);
             PizzaObjects.Add(currentPizzaObject);
             currentPizzaObject.transform.position = new Vector3(0, 0, 20f);
+            currentPizzaObject.SetActive(false);
         }
         else //first run
         {
@@ -56,11 +60,15 @@ public class PizzaManager : MonoBehaviour, IManager {
 
         //_BW TODO addcomponenet/getcomponent all expensive at runtime - especially in UPDATE
         currentPizzaObject = (GameObject)Instantiate(dough, Vector3.zero, Quaternion.identity);
-        currentPizzaObject.gameObject.AddComponent<PizzaOrders>();
-        currentPizzaObject.gameObject.GetComponent<PizzaOrders>().CreateOrder();
-        currentPizzaObject.gameObject.AddComponent<PizzaClass>();
-        currentPizza = currentPizzaObject.GetComponent<PizzaClass>();
-        currentPizzaObject.gameObject.GetComponent<PizzaOrders>().DeliverPizza(currentPizza);
+        theOrder = currentPizzaObject.gameObject.AddComponent<PizzaOrders>();
+        theOrder.CreateOrder();
+        //_ME cleaned up this a bit
+        //
+        //currentPizzaObject.gameObject.GetComponent<PizzaOrders>().CreateOrder();
+        //currentPizzaObject.gameObject.AddComponent<PizzaClass>();
+        //currentPizza = currentPizzaObject.GetComponent<PizzaClass>();
+        currentPizza = currentPizzaObject.gameObject.AddComponent<PizzaClass>();
+        theOrder.DeliverPizza(currentPizza);
 
     }
 
