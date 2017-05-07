@@ -11,6 +11,9 @@ public class HandMovement : MonoBehaviour {
     private float _dashMod = 50f;
     private float _dashCoolDown = 1f;
 
+    private float minForce = -13f;
+    private float maxForce = -7f;
+
     private bool _dashUsed = false;
     public bool _dashAvailable = true;
 
@@ -132,10 +135,26 @@ public class HandMovement : MonoBehaviour {
             //ACTION
             if (Input.GetButtonDown(_controlsAction))
             {
+                //animation
                 if(_playerRef.ActiveTopping == Constants.Toppings.dough)
                     _playerRef.PlayAnimation(Constants.ANIMATION_PLAYER_GRIP);
                 else
                     _playerRef.PlayAnimation(Constants.ANIMATION_PLAYER_THROW);
+
+                //action
+                //firetoppings
+                PizzaToppingUnifier NewTopping = ObjectPooler.SharedInstance.GetTopping(_playerRef.ActiveTopping);
+                if( NewTopping != null )
+                {
+                    {
+                        Vector3 target = _playerRef.transform.position + _tableRef.transform.position;
+                        Vector3 spawnPos = gameObject.transform.position + Random.onUnitSphere * 0.6f;
+                        NewTopping.transform.position = spawnPos;
+                        NewTopping.gameObject.SetActive(true);
+                        NewTopping.Rigidbody.AddForce(target.normalized * Random.Range(minForce, maxForce), ForceMode.VelocityChange);
+                    }
+
+                }
             }
  
         }

@@ -29,6 +29,7 @@ public class MenuManager : MonoBehaviour, IManager {
     }
         
     private List<PlayerHUD> _playerHudElements = new List<PlayerHUD>();
+    private List<ToppingIcon> _playersToppingPool = new List<ToppingIcon>();
 
     private void Awake ()
     {
@@ -38,6 +39,7 @@ public class MenuManager : MonoBehaviour, IManager {
     private void SetupVariables ()
     {
         _playerHudElements = GameObject.FindObjectsOfType<PlayerHUD>().ToList();
+        _playersToppingPool = new List<ToppingIcon>(Toppings);
     }
 
     // Use this for initialization
@@ -67,6 +69,29 @@ public class MenuManager : MonoBehaviour, IManager {
     public void Init()
     {
         SubscribeToEvents();
+        RemoveCommonToppings();
+    }
+
+    public ToppingIcon GetUnusedTopping ()
+    {
+        int ran = Random.Range(0, _playersToppingPool.Count);
+
+        ToppingIcon t = _playersToppingPool[ran];
+        _playersToppingPool.Remove(t);
+        return t;
+    }
+
+    private void RemoveCommonToppings ()
+    {
+        List<ToppingIcon> temp = new List<ToppingIcon>(_playersToppingPool);
+        foreach (ToppingIcon icon in temp)
+        {
+            if (icon.Topping == Constants.Toppings.dough || icon.Topping == Constants.Toppings.cheese ||
+                icon.Topping == Constants.Toppings.sauce)
+            {
+                _playersToppingPool.Remove(icon);
+            }
+        }
     }
 
     public PlayerHUD GetHudForPlayer(Constants.Characters player)
