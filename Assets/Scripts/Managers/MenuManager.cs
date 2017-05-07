@@ -15,6 +15,7 @@ public class ToppingIcon
 public class MenuManager : MonoBehaviour, IManager {
 
     public List<ToppingIcon> Toppings = new List<ToppingIcon>();
+    public MenuHUD HUD;
 
     private static MenuManager _instance;
     public static MenuManager Instance
@@ -60,7 +61,7 @@ public class MenuManager : MonoBehaviour, IManager {
 
     private void HandleGameStateChanged(Constants.GameState state)
     {
-        if (state == Constants.GameState.starting)
+        if (state == Constants.GameState.end)
         {
 
         }
