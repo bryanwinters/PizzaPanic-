@@ -64,6 +64,14 @@ public class PizzaToppingUnifier : MonoBehaviour {
         }
     }
 
+    void Repooled ()
+    {
+        gameObject.layer = LayerMask.NameToLayer(Constants.LAYER_TOPPINGS);
+        _rigidbody.isKinematic = false;
+        _rigidbody.useGravity = true;
+        AddedAlready = false;
+        Debug.Log("repooled");
+    }
     void AddSelfToPizza()
     {
         if( MyTopping == Constants.Toppings.dough )

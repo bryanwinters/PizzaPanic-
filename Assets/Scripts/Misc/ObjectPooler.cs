@@ -45,6 +45,7 @@ public class ObjectPooler : MonoBehaviour {
                     objCounter = 0;
                 }
                 GameObject obj = (GameObject)Instantiate(sauce[objCounter], gameObject.transform.position, Quaternion.Euler(-90f, 0f, 0f));
+                obj.transform.parent = gameObject.transform;
                 PizzaToppingUnifier p = obj.GetComponent<PizzaToppingUnifier>();
                 //obj.transform.Rotate(Vector3.right, 90f);
                 p.gameObject.SetActive(false);
@@ -66,6 +67,7 @@ public class ObjectPooler : MonoBehaviour {
                     objCounter = 0;
                 }
                 GameObject obj = (GameObject)Instantiate(cheese[objCounter], gameObject.transform.position, Quaternion.Euler(-90f, 0f, 0f));
+                obj.transform.parent = gameObject.transform;
                 PizzaToppingUnifier p = obj.GetComponent<PizzaToppingUnifier>();
                 //obj.transform.Rotate(Vector3.right, 90f);
                 p.gameObject.SetActive(false);
@@ -87,6 +89,7 @@ public class ObjectPooler : MonoBehaviour {
             for (int i = 0; i < amountToPool; i++)
             {
                 GameObject obj = (GameObject)Instantiate(pepperoni[objCounter]);
+                obj.transform.parent = gameObject.transform;
                 PizzaToppingUnifier p = obj.GetComponent<PizzaToppingUnifier>();
                 p.gameObject.SetActive(false);
                 PooledPepperoni.Add(p);
@@ -107,6 +110,7 @@ public class ObjectPooler : MonoBehaviour {
             for (int i = 0; i < amountToPool; i++)
             {
                 GameObject obj = (GameObject)Instantiate(bacon[objCounter]);
+                obj.transform.parent = gameObject.transform;
                 PizzaToppingUnifier p = obj.GetComponent<PizzaToppingUnifier>();
                 p.gameObject.SetActive(false);
                 PooledBacon.Add(p);
@@ -127,6 +131,7 @@ public class ObjectPooler : MonoBehaviour {
             for (int i = 0; i < amountToPool; i++)
             {
                 GameObject obj = (GameObject)Instantiate(anchovies[objCounter]);
+                obj.transform.parent = gameObject.transform;
                 PizzaToppingUnifier p = obj.GetComponent<PizzaToppingUnifier>();
                 p.gameObject.SetActive(false);
                 PooledAnchovies.Add(p);
@@ -147,6 +152,7 @@ public class ObjectPooler : MonoBehaviour {
             for (int i = 0; i < amountToPool; i++)
             {
                 GameObject obj = (GameObject)Instantiate(greenpepper[objCounter]);
+                obj.transform.parent = gameObject.transform;
                 PizzaToppingUnifier p = obj.GetComponent<PizzaToppingUnifier>();
                 p.gameObject.SetActive(false);
                 PooledGreenPepper.Add(p);
@@ -167,6 +173,7 @@ public class ObjectPooler : MonoBehaviour {
             for (int i = 0; i < amountToPool; i++)
             {
                 GameObject obj = (GameObject)Instantiate(mushroom[objCounter]);
+                obj.transform.parent = gameObject.transform;
                 PizzaToppingUnifier p = obj.GetComponent<PizzaToppingUnifier>();
                 p.gameObject.SetActive(false);
                 PooledMushroom.Add(p);
@@ -187,6 +194,7 @@ public class ObjectPooler : MonoBehaviour {
             for (int i = 0; i < amountToPool; i++)
             {
                 GameObject obj = (GameObject)Instantiate(hotpepper[objCounter]);
+                obj.transform.parent = gameObject.transform;
                 PizzaToppingUnifier p = obj.GetComponent<PizzaToppingUnifier>();
                 p.gameObject.SetActive(false);
                 PooledHotPepper.Add(p);
@@ -207,6 +215,7 @@ public class ObjectPooler : MonoBehaviour {
             for (int i = 0; i < amountToPool; i++)
             {
                 GameObject obj = (GameObject)Instantiate(pineapple[objCounter]);
+                obj.transform.parent = gameObject.transform;
                 PizzaToppingUnifier p = obj.GetComponent<PizzaToppingUnifier>();
                 p.gameObject.SetActive(false);
                 PooledPineapple.Add(p);
@@ -227,6 +236,7 @@ public class ObjectPooler : MonoBehaviour {
             for (int i = 0; i < amountToPool; i++)
             {
                 GameObject obj = (GameObject)Instantiate(spinach[objCounter]);
+                obj.transform.parent = gameObject.transform;
                 PizzaToppingUnifier p = obj.GetComponent<PizzaToppingUnifier>();
                 p.gameObject.SetActive(false);
                 PooledSpinach.Add(p);
@@ -235,6 +245,230 @@ public class ObjectPooler : MonoBehaviour {
 
     }
 	
+    PizzaToppingUnifier OrderCheese ()
+    {
+        for (int i = 0; i < 10; i++)
+        {
+            int objCounter = 0;
+            if (cheese.Length > 1)
+            {
+                objCounter = Random.Range(0, cheese.Length);
+            }
+            else
+            {
+                objCounter = 0;
+            }
+            GameObject obj = (GameObject)Instantiate(cheese[objCounter], gameObject.transform.position, Quaternion.Euler(-90f, 0f, 0f));
+            obj.transform.parent = gameObject.transform;
+            PizzaToppingUnifier p = obj.GetComponent<PizzaToppingUnifier>();
+            //obj.transform.Rotate(Vector3.right, 90f);
+            p.gameObject.SetActive(false);
+            PooledCheese.Add(p);
+        }
+
+        return PooledCheese[PooledCheese.Count -1];
+    }
+
+    PizzaToppingUnifier OrderSauce()
+    {
+        for (int i = 0; i < 10; i++)
+        {
+            int objCounter = 0;
+            if (sauce.Length > 1)
+            {
+                objCounter = Random.Range(0, sauce.Length);
+            }
+            else
+            {
+                objCounter = 0;
+            }
+            GameObject obj = (GameObject)Instantiate(sauce[objCounter], gameObject.transform.position, Quaternion.Euler(-90f, 0f, 0f));
+            obj.transform.parent = gameObject.transform;
+            PizzaToppingUnifier p = obj.GetComponent<PizzaToppingUnifier>();
+            //obj.transform.Rotate(Vector3.right, 90f);
+            p.gameObject.SetActive(false);
+            PooledSauce.Add(p);
+        }
+        return PooledSauce[PooledSauce.Count - 1];
+    }
+
+    PizzaToppingUnifier OrderPep()
+    {
+        int objCounter = 0;
+        if (pepperoni.Length > 1)
+        {
+            objCounter = Random.Range(0, pepperoni.Length);
+        }
+        else
+        {
+            objCounter = 0;
+        }
+        for (int i = 0; i < 10; i++)
+        {
+            GameObject obj = (GameObject)Instantiate(pepperoni[objCounter]);
+            obj.transform.parent = gameObject.transform;
+            PizzaToppingUnifier p = obj.GetComponent<PizzaToppingUnifier>();
+            p.gameObject.SetActive(false);
+            PooledPepperoni.Add(p);
+        }
+        return PooledPepperoni[PooledPepperoni.Count - 1];
+    }
+
+    PizzaToppingUnifier OrderBacon()
+    {
+        int objCounter = 0;
+        if (bacon.Length > 1)
+        {
+            objCounter = Random.Range(0, bacon.Length);
+        }
+        else
+        {
+            objCounter = 0;
+        }
+        for (int i = 0; i < 10; i++)
+        {
+            GameObject obj = (GameObject)Instantiate(bacon[objCounter]);
+            obj.transform.parent = gameObject.transform;
+            PizzaToppingUnifier p = obj.GetComponent<PizzaToppingUnifier>();
+            p.gameObject.SetActive(false);
+            PooledBacon.Add(p);
+        }
+        return PooledBacon[PooledBacon.Count - 1];
+    }
+
+    PizzaToppingUnifier OrderAnchovies()
+    {
+        int objCounter = 0;
+        if (anchovies.Length > 1)
+        {
+            objCounter = Random.Range(0, anchovies.Length);
+        }
+        else
+        {
+            objCounter = 0;
+        }
+        for (int i = 0; i < 10; i++)
+        {
+            GameObject obj = (GameObject)Instantiate(anchovies[objCounter]);
+            obj.transform.parent = gameObject.transform;
+            PizzaToppingUnifier p = obj.GetComponent<PizzaToppingUnifier>();
+            p.gameObject.SetActive(false);
+            PooledAnchovies.Add(p);
+        }
+        return PooledAnchovies[PooledAnchovies.Count - 1];
+    }
+
+    PizzaToppingUnifier OrderGreenPeppers()
+    {
+        int objCounter = 0;
+        if (greenpepper.Length > 1)
+        {
+            objCounter = Random.Range(0, greenpepper.Length);
+        }
+        else
+        {
+            objCounter = 0;
+        }
+        for (int i = 0; i < 10; i++)
+        {
+            GameObject obj = (GameObject)Instantiate(greenpepper[objCounter]);
+            obj.transform.parent = gameObject.transform;
+            PizzaToppingUnifier p = obj.GetComponent<PizzaToppingUnifier>();
+            p.gameObject.SetActive(false);
+            PooledGreenPepper.Add(p);
+        }
+        return PooledGreenPepper[PooledGreenPepper.Count - 1];
+    }
+
+    PizzaToppingUnifier OrderMushroom()
+    {
+        int objCounter = 0;
+        if (mushroom.Length > 1)
+        {
+            objCounter = Random.Range(0, mushroom.Length);
+        }
+        else
+        {
+            objCounter = 0;
+        }
+        for (int i = 0; i < 10; i++)
+        {
+            GameObject obj = (GameObject)Instantiate(mushroom[objCounter]);
+            obj.transform.parent = gameObject.transform;
+            PizzaToppingUnifier p = obj.GetComponent<PizzaToppingUnifier>();
+            p.gameObject.SetActive(false);
+            PooledMushroom.Add(p);
+        }
+        return PooledMushroom[PooledMushroom.Count - 1];
+    }
+
+    PizzaToppingUnifier OrderHotPepper()
+    {
+        int objCounter = 0;
+        if (hotpepper.Length > 1)
+        {
+            objCounter = Random.Range(0, hotpepper.Length);
+        }
+        else
+        {
+            objCounter = 0;
+        }
+        for (int i = 0; i < 10; i++)
+        {
+            GameObject obj = (GameObject)Instantiate(hotpepper[objCounter]);
+            obj.transform.parent = gameObject.transform;
+            PizzaToppingUnifier p = obj.GetComponent<PizzaToppingUnifier>();
+            p.gameObject.SetActive(false);
+            PooledHotPepper.Add(p);
+        }
+        return PooledHotPepper[PooledHotPepper.Count - 1];
+    }
+
+    PizzaToppingUnifier OrderPineapple()
+    {
+        int objCounter = 0;
+        if (pineapple.Length > 1)
+        {
+            objCounter = Random.Range(0, pineapple.Length);
+        }
+        else
+        {
+            objCounter = 0;
+        }
+        for (int i = 0; i < 10; i++)
+        {
+            GameObject obj = (GameObject)Instantiate(pineapple[objCounter]);
+            obj.transform.parent = gameObject.transform;
+            PizzaToppingUnifier p = obj.GetComponent<PizzaToppingUnifier>();
+            p.gameObject.SetActive(false);
+            PooledPineapple.Add(p);
+        }
+        return PooledPineapple[PooledPineapple.Count - 1];
+    }
+
+    PizzaToppingUnifier OrderSpinach()
+    {
+        int objCounter = 0;
+        if (spinach.Length > 1)
+        {
+            objCounter = Random.Range(0, spinach.Length);
+        }
+        else
+        {
+            objCounter = 0;
+        }
+        for (int i = 0; i < 10; i++)
+        {
+            GameObject obj = (GameObject)Instantiate(spinach[objCounter]);
+            obj.transform.parent = gameObject.transform;
+            PizzaToppingUnifier p = obj.GetComponent<PizzaToppingUnifier>();
+            p.gameObject.SetActive(false);
+            PooledSpinach.Add(p);
+        }
+        return PooledSpinach[PooledSpinach.Count - 1];
+    }
+    
+
     public PizzaToppingUnifier GetTopping(Constants.Toppings toppingNumber)
     {
 
@@ -244,9 +478,12 @@ public class ObjectPooler : MonoBehaviour {
             {
                 if (!PooledSauce[i].gameObject.activeInHierarchy)
                 {
+                    PooledSauce[i].transform.parent = gameObject.transform;
+                    PooledSauce[i].SendMessage("Repooled", SendMessageOptions.DontRequireReceiver);
                     return PooledSauce[i];
                 }
             }
+            return OrderSauce();
         }
         else if (toppingNumber == Constants.Toppings.cheese)
         {
@@ -254,9 +491,12 @@ public class ObjectPooler : MonoBehaviour {
             {
                 if (!PooledCheese[i].gameObject.activeInHierarchy)
                 {
+                    PooledCheese[i].transform.parent = gameObject.transform;
+                    PooledCheese[i].SendMessage("Repooled", SendMessageOptions.DontRequireReceiver);
                     return PooledCheese[i];
                 }
             }
+            return OrderCheese();
         }
         else if (toppingNumber == Constants.Toppings.pepperoni)
         {
@@ -264,9 +504,12 @@ public class ObjectPooler : MonoBehaviour {
             {
                 if (!PooledPepperoni[i].gameObject.activeInHierarchy)
                 {
+                    PooledPepperoni[i].transform.parent = gameObject.transform;
+                    PooledPepperoni[i].SendMessage("Repooled", SendMessageOptions.DontRequireReceiver);
                     return PooledPepperoni[i];
                 }
             }
+            return OrderPep();
         }
         else if( toppingNumber == Constants.Toppings.bacon )
         {
@@ -274,9 +517,12 @@ public class ObjectPooler : MonoBehaviour {
             {
                 if (!PooledBacon[i].gameObject.activeInHierarchy)
                 {
+                    PooledBacon[i].transform.parent = gameObject.transform;
+                    PooledBacon[i].SendMessage("Repooled", SendMessageOptions.DontRequireReceiver);
                     return PooledBacon[i];
                 }
             }
+            return OrderBacon();
         }
         else if (toppingNumber == Constants.Toppings.anchovies)
         {
@@ -284,9 +530,12 @@ public class ObjectPooler : MonoBehaviour {
             {
                 if (!PooledAnchovies[i].gameObject.activeInHierarchy)
                 {
+                    PooledAnchovies[i].transform.parent = gameObject.transform;
+                    PooledAnchovies[i].SendMessage("Repooled", SendMessageOptions.DontRequireReceiver);
                     return PooledAnchovies[i];
                 }
             }
+            return OrderAnchovies();
         }
         else if (toppingNumber == Constants.Toppings.greenPepper)
         {
@@ -294,9 +543,12 @@ public class ObjectPooler : MonoBehaviour {
             {
                 if (!PooledGreenPepper[i].gameObject.activeInHierarchy)
                 {
+                    PooledGreenPepper[i].transform.parent = gameObject.transform;
+                    PooledGreenPepper[i].SendMessage("Repooled", SendMessageOptions.DontRequireReceiver);
                     return PooledGreenPepper[i];
                 }
             }
+            return OrderGreenPeppers();
         }
         if (toppingNumber == Constants.Toppings.mushroom)
         {
@@ -304,9 +556,12 @@ public class ObjectPooler : MonoBehaviour {
             {
                 if (!PooledMushroom[i].gameObject.activeInHierarchy)
                 {
+                    PooledMushroom[i].transform.parent = gameObject.transform;
+                    PooledMushroom[i].SendMessage("Repooled", SendMessageOptions.DontRequireReceiver);
                     return PooledMushroom[i];
                 }
             }
+            return OrderMushroom();
         }
         else if (toppingNumber == Constants.Toppings.hotPepper)
         {
@@ -314,9 +569,12 @@ public class ObjectPooler : MonoBehaviour {
             {
                 if (!PooledHotPepper[i].gameObject.activeInHierarchy)
                 {
+                    PooledHotPepper[i].transform.parent = gameObject.transform;
+                    PooledHotPepper[i].SendMessage("Repooled", SendMessageOptions.DontRequireReceiver);
                     return PooledHotPepper[i];
                 }
             }
+            return OrderHotPepper();
         }
         else if (toppingNumber == Constants.Toppings.pineapple)
         {
@@ -324,9 +582,12 @@ public class ObjectPooler : MonoBehaviour {
             {
                 if (!PooledPineapple[i].gameObject.activeInHierarchy)
                 {
+                    PooledPineapple[i].transform.parent = gameObject.transform;
+                    PooledPineapple[i].SendMessage("Repooled", SendMessageOptions.DontRequireReceiver);
                     return PooledPineapple[i];
                 }
             }
+            return OrderPineapple();
         }
         else if (toppingNumber == Constants.Toppings.spinach)
         {
@@ -334,9 +595,12 @@ public class ObjectPooler : MonoBehaviour {
             {
                 if (!PooledSpinach[i].gameObject.activeInHierarchy)
                 {
+                    PooledSpinach[i].transform.parent = gameObject.transform;
+                    PooledSpinach[i].SendMessage("Repooled", SendMessageOptions.DontRequireReceiver);
                     return PooledSpinach[i];
                 }
             }
+            return OrderSpinach();
         }
 
         Debug.LogWarning("No topping returned.");
