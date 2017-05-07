@@ -16,7 +16,7 @@ public class PizzaClass : MonoBehaviour {
     //7 - mushroom
     //8 - hotpepper
     //9 - pineapple
-    //
+    //10 - spinach
     //
     //i dont know what mel wrote
 
@@ -30,6 +30,7 @@ public class PizzaClass : MonoBehaviour {
     int mushroomAmount;
     int hotPepperAmount;
     int pineappleAmount;
+    int spinachAmount;
     
 
 
@@ -84,7 +85,11 @@ public class PizzaClass : MonoBehaviour {
         else if (topping == Constants.Toppings.pineapple)
         {
             pineappleAmount += amount;
-        }       
+        }
+        else if (topping == Constants.Toppings.spinach)
+        {
+            spinachAmount += amount;
+        }
     }
 
     public int ReturnDoughSize()
@@ -127,6 +132,10 @@ public class PizzaClass : MonoBehaviour {
     public int ReturnPineappleAmount ()
     {
         return pineappleAmount;
+    }
+    public int ReturnSpinachAmount ()
+    {
+        return spinachAmount;
     }
     
 }

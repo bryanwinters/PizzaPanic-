@@ -21,9 +21,9 @@ public class ToppingTossing : MonoBehaviour {
         {
             //+1 topping
             currentTopping += 1;
-            if( (int)currentTopping >= 10 )
+            if( (int)currentTopping >= 11 )
             {
-                currentTopping -= 10;
+                currentTopping -= 11;
             }
             Debug.Log("Current: " + currentTopping.ToString());
         }
@@ -33,7 +33,7 @@ public class ToppingTossing : MonoBehaviour {
             currentTopping -= 1;
             if (currentTopping < 0)
             {
-                currentTopping += 10;
+                currentTopping += 11;
             }
             Debug.Log("Current: " + currentTopping.ToString());
         }
