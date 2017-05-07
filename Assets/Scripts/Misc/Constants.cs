@@ -24,7 +24,7 @@ public static class Constants : object {
 
     //gameplay
     public static float PLAYER_SPAWN_OFFSET = 5f;
-    public static int GAME_STARTING_TIME = 5;//120;
+    public static int GAME_STARTING_TIME = 120;
 
     //controls
     public static float CONTROLLER_TRIGGER_DEAD_ZONE = 0.5f;

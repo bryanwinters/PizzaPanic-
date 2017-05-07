@@ -1,5 +1,6 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
 using UnityEngine.UI;
 using TMPro;
@@ -12,6 +13,8 @@ public class MenuHUD : MonoBehaviour {
     [SerializeField] private TextMeshProUGUI _timerText;
     [SerializeField] private Image _timerImage;
 
+    private List<HUDTopping> _toppingsIcons = new List<HUDTopping>();
+
     private void Awake () 
     {
         SetupVariables();
@@ -20,7 +23,7 @@ public class MenuHUD : MonoBehaviour {
 	// Use this for initialization
     private void SetupVariables () 
     {
-        
+        _toppingsIcons = this.GetComponentsInChildren<HUDTopping>().ToList();
 	}
 
     private void Start () 
@@ -31,7 +34,7 @@ public class MenuHUD : MonoBehaviour {
     private void SubscribeToEvents () 
     {
         GameManager.Instance.OnGameStateChanged += HandleGameStateChanged;
-        PlayerManager.Instance.OnPizzaSubmitted += HandleNewPizza;
+        //PlayerManager.Instance.OnPizzaSubmitted += HandleNewPizza;
     }
 
     private void HandleGameStateChanged(Constants.GameState state)
@@ -42,9 +45,16 @@ public class MenuHUD : MonoBehaviour {
         }
     }
 
-    private void HandleNewPizza ()
+    public void HandleNewPizza (Constants.Toppings topping, int amount)
     {
-        //PizzaManager.SharedInstance.TheOrder.
+        //Update hud icons
+        foreach (HUDTopping t in _toppingsIcons)
+        {
+            if(t.ToppingType == topping)
+            {
+                t.SetToppingLevel(amount); //get amount here
+            }
+        }
     }
 
     private void SendTimerCompleteEvent ()

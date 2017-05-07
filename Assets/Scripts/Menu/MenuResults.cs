@@ -63,13 +63,16 @@ public class MenuResults : MonoBehaviour {
 
     private void Update ()
     {
-        if (Input.GetButtonDown(_controlsOne) || Input.GetButtonDown(_controlsTwo) || Input.GetButtonDown(_controlsThree) ||
-            Input.GetButtonDown(_controlsFour))
+        if (GameManager.Instance.GameState == Constants.GameState.end)
         {
-            _restartCount++;
+            if (Input.GetButtonDown(_controlsOne) || Input.GetButtonDown(_controlsTwo) || Input.GetButtonDown(_controlsThree) ||
+            Input.GetButtonDown(_controlsFour))
+            {
+                _restartCount++;
 
-            if (_restartCount >= _restartCountMax)
-                UnityEngine.SceneManagement.SceneManager.LoadScene("main");
+                if (_restartCount >= _restartCountMax)
+                    UnityEngine.SceneManagement.SceneManager.LoadScene("main");
+            }
         }
     }
 }
