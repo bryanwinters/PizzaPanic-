@@ -32,6 +32,8 @@ public class PlayerManager : MonoBehaviour, IManager {
     private int _playersReady;
     private int _pizzasReady;
 
+    
+
     private void Awake ()
     {
         SetupVariables();

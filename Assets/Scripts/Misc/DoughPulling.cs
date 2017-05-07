@@ -13,18 +13,23 @@ public class DoughPulling : MonoBehaviour {
 	
 	// Update is called once per frame
 	void Update () {
-		
-        if( Input.GetKeyDown(KeyCode.DownArrow))
+        if( Input.GetKeyDown(KeyCode.T))
         {
-            for(int x = 0; x < bones.Count; x++)
-            {
-                Vector3 tempVec = gameObject.transform.position - bones[x].transform.position;
-                tempVec = bones[x].transform.position + (tempVec * 0.01f);  
-                bones[x].transform.position = tempVec;
-                bones[x].SendMessageUpwards("FixMyMeshCollider", SendMessageOptions.DontRequireReceiver);
-            }
+            PULLDOUGH();
         }
 	}
+
+    public void PULLDOUGH()
+    {
+        /*
+        for (int x = 0; x < bones.Count; x++)
+        {
+            Vector3 tempVec = gameObject.transform.position - bones[x].transform.position;
+            tempVec = bones[x].transform.position + bones[x].transform.forward * 0.5f;
+            bones[x].transform.position = tempVec;
+            //bones[x].SendMessageUpwards("FixMyMeshCollider", SendMessageOptions.DontRequireReceiver);
+        }*/
+    }
 
     void OnTriggerEnter (Collider c)
     {

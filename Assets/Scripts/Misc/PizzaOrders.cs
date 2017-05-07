@@ -5,7 +5,7 @@ using UnityEngine;
 public class PizzaOrders : MonoBehaviour {
 
     //enum PizzaSizes { small = 0, medium, large};
-    Constants.PizzaSizes PizzaOrderSize;
+    public Constants.PizzaSizes PizzaOrderSize;
     enum ToppingAmounts { light = 0, regular, extra};
 
     PizzaClass CustomersPizza;
@@ -394,7 +394,7 @@ public class PizzaOrders : MonoBehaviour {
     public int ScorePizza ()
     {
         //score dough
-        PizzaScore += CustomersPizza.ReturnDoughScore(PizzaOrderSize);
+        //PizzaScore += CustomersPizza.ReturnDoughScore(PizzaOrderSize);
 
 
 
