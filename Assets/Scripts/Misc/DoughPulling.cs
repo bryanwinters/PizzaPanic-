@@ -21,14 +21,14 @@ public class DoughPulling : MonoBehaviour {
 
     public void PULLDOUGH()
     {
-        /*
+        
         for (int x = 0; x < bones.Count; x++)
         {
-            Vector3 tempVec = gameObject.transform.position - bones[x].transform.position;
+            Vector3 tempVec = bones[x].transform.position - bones[x].transform.root.transform.position;
             tempVec = bones[x].transform.position + bones[x].transform.forward * 0.5f;
             bones[x].transform.position = tempVec;
             //bones[x].SendMessageUpwards("FixMyMeshCollider", SendMessageOptions.DontRequireReceiver);
-        }*/
+        }
     }
 
     void OnTriggerEnter (Collider c)
