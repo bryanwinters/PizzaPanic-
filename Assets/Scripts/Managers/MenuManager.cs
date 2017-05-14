@@ -66,6 +66,10 @@ public class MenuManager : MonoBehaviour, IManager {
         {
 
         }
+        else if (state == Constants.GameState.cancelStart)
+        {
+            _playersToppingPool = new List<ToppingIcon>(Toppings);
+        }
     }
 
     public void Init()

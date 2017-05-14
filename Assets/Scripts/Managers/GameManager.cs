@@ -43,6 +43,8 @@ public class GameManager : MonoBehaviour {
     private void SubscribeToEvents ()
     {
         PlayerManager.Instance.OnPlayersReady += HandleOnPlayersReady;
+        PlayerManager.Instance.OnPlayerCancelled += HandlePlayerCancelled;
+        PlayerManager.Instance.OnPlayerHowTo += HandlePlayerHowTo;
         MenuManager.Instance.HUD.OnTimerComplete += HandleTimerComplete;
     }
 
@@ -78,6 +80,27 @@ public class GameManager : MonoBehaviour {
         StartCoroutine(StartGame());
     }
 
+    private void HandlePlayerCancelled ()
+    {
+        if (_gameState == Constants.GameState.starting)
+        {
+            StopAllCoroutines();
+            StartCoroutine(CancelStart());
+        }
+        else if (_gameState == Constants.GameState.howTo)
+        {
+            SetGameState(Constants.GameState.menu);
+        }
+    }
+
+    private void HandlePlayerHowTo ()
+    {
+        if (_gameState == Constants.GameState.menu)
+        {
+            SetGameState(Constants.GameState.howTo);
+        }
+    }
+
     private void HandleTimerComplete ()
     {
         SetGameState(Constants.GameState.end);
@@ -90,5 +113,14 @@ public class GameManager : MonoBehaviour {
         yield return new WaitForSeconds((float)Constants.MENU_STARTING_TIME);
 
         SetGameState(Constants.GameState.game);
+    }
+
+    private IEnumerator CancelStart ()
+    {
+        SetGameState(Constants.GameState.cancelStart);
+
+        yield return new WaitForEndOfFrame();
+
+        SetGameState(Constants.GameState.menu);
     }
 }

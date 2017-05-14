@@ -13,7 +13,7 @@ public static class Constants : object {
     }
     public enum PizzaSizes { tooSmall = 0, small, medium, large, tooLarge}
     public enum Characters {meowzzarella = 0, octopie = 1, crustodile = 2, bonemando = 3}
-    public enum GameState {menu = 0, starting = 1, game = 2, end = 3}
+    public enum GameState {menu = 0, starting = 1, game = 2, end = 3, cancelStart = 4, howTo = 5}
 
     //NUMBERS
     //settings
@@ -68,6 +68,7 @@ public static class Constants : object {
     public const string CONTROLS_CYCLE_RIGHT = "CycleRight";
     public const string CONTROLS_CYCLE_LEFT = "CycleLeft";
     public const string CONTROLS_OVEN_X = "OvenX";
+    public const string CONTROLS_CANCEL = "Cancel";
 
     //animation
     public const string ANIMATION_PLAYER_IDLE = "Idle";

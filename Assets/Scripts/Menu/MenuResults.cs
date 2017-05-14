@@ -59,9 +59,9 @@ public class MenuResults : MonoBehaviour {
         {
             //set scores
             _numPizzasMade.text = PizzaManager.SharedInstance.GetNumPizzas().ToString();
-            _averageQuality.text = PizzaManager.SharedInstance.GetAverageScore().ToString();
-            _bestPizza.text = PizzaManager.SharedInstance.GetHighScore().ToString();
-            _worstPizza.text = PizzaManager.SharedInstance.GetLowScore().ToString();
+            _averageQuality.text = PizzaManager.SharedInstance.GetAverageScore().ToString() + _qualitySuffix;
+            _bestPizza.text = PizzaManager.SharedInstance.GetHighScore().ToString() + _qualitySuffix;
+            _worstPizza.text = PizzaManager.SharedInstance.GetLowScore().ToString() + _qualitySuffix;
             _ranking.text = PizzaManager.SharedInstance.GetRanking();
 
             _canvasGroup.DOFade(1f, 0.5f).SetEase(Ease.OutCirc);
