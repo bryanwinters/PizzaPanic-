@@ -10,6 +10,12 @@ public class HUDTopping : MonoBehaviour {
 
     public void SetToppingLevel (int amount)
     {
+        if (this.gameObject.activeSelf == true && amount == 0)
+            this.gameObject.SetActive(false);
+
+        if (this.gameObject.activeSelf == false && amount != 0)
+            this.gameObject.SetActive(true);
+
         for (int i = 0; i < _toppingAmount.Count; i++)
         {
             if (i >= amount || amount == 0)

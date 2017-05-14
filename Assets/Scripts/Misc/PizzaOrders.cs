@@ -1,5 +1,6 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
 
 public class PizzaOrders : MonoBehaviour {
@@ -136,28 +137,17 @@ public class PizzaOrders : MonoBehaviour {
         }
 
         Debug.LogWarning("start toppings");
-        int NumberOfToppings = Random.Range(0, 9);
-        //int[] ToppingsOrder = new int[NumberOfToppings];
-        List<Constants.PlayerToppings> RandomToppings = new List<Constants.PlayerToppings>();
-        List<int> ToppingsList = new List<int>();
+        List<Constants.PlayerToppings> RandomToppings = new List<Constants.PlayerToppings>(MenuManager.Instance.AvailableToppingsForPlayers);
+        int NumberOfToppings = Random.Range(0, RandomToppings.Count);
 
-        for (int x = 3; x < 11; x++)
+        //shuffle list
+        for (int i = 0; i < RandomToppings.Count; i++)
         {
-            ToppingsList.Add(x);
+            Constants.PlayerToppings temp = RandomToppings[i];
+            int randomIndex = Random.Range(i, RandomToppings.Count);
+            RandomToppings[i] = RandomToppings[randomIndex];
+            RandomToppings[randomIndex] = temp;
         }
-
-
-        //randomize the toppings here
-        for (int x = 0; x < 8; x++)
-        {
-            int number = Random.Range(0, ToppingsList.Count);
-            RandomToppings.Add((Constants.PlayerToppings)ToppingsList[number]);
-            Debug.LogError("Stored: " +RandomToppings[x].ToString());
-            ToppingsList.RemoveAt(number);
-            //Debug.LogError("Post Removal: " + ToppingsList[number]);
-        }
-
-        int ToppingsOrderCounter = 0;
 
         MenuManager.Instance.HUD.HandleNewPizza(Constants.Toppings.pepperoni, 0);
         MenuManager.Instance.HUD.HandleNewPizza(Constants.Toppings.bacon, 0);
@@ -168,7 +158,7 @@ public class PizzaOrders : MonoBehaviour {
         MenuManager.Instance.HUD.HandleNewPizza(Constants.Toppings.mushroom, 0);
         MenuManager.Instance.HUD.HandleNewPizza(Constants.Toppings.spinach, 0);
 
-        for (int x = 0; x < NumberOfToppings; x++)
+        for (int x = 0; x <= NumberOfToppings; x++)
         {
             if( RandomToppings[x] == Constants.PlayerToppings.pepperoni )
             {

@@ -61,11 +61,13 @@ public class Player : MonoBehaviour {
         if (_hudRef)
             _hudRef.Init();
 
-        DoughBroken();
+        StartCoroutine(DoughBroken());
     }
 
     private IEnumerator DoughBroken ()
     {
+        yield return new WaitForEndOfFrame();
+        yield return new WaitForEndOfFrame();
         yield return new WaitForEndOfFrame();
 
         #if DOUGH_PULLING_BROKEN
@@ -120,7 +122,6 @@ public class Player : MonoBehaviour {
     private void SetSpecificTopping (Constants.Toppings topping)
     {
         _activeTopping = _hudRef.SetTopping(topping);
-
     }
 
     public void PlayAnimation (string anim)

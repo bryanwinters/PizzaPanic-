@@ -45,6 +45,13 @@ public static class Constants  {
     public static int MEDIUM_TOPPING_MODIFIER = 3;
     public static int LARGE_TOPPING_MODIFIER = 5;
 
+    public static int PIZZA_FLING_MIN = 0;
+    public static int PIZZA_FLING_MAX = 4;
+
+    public static float[] SMALL_PIZZA_FLING_VALUES = new float[]{8f,11f,14f,17f,22f};
+    public static float[] MEDIUM_PIZZA_FLING_VALUES = new float[]{2f,6.5f,11f,15.5f,22f};
+    public static float[] LARGE_PIZZA_FLING_VALUES = new float[]{-10f,-2.5f,5f,12.5f,22f};
+
     //controls
     public static float CONTROLLER_TRIGGER_DEAD_ZONE = 0.5f;
 

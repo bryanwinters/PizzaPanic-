@@ -11,8 +11,7 @@ public class HandMovement : MonoBehaviour {
     private float _dashMod = 50f;
     private float _dashCoolDown = 1f;
 
-    private float minForce = -13f;
-    private float maxForce = -7f;
+    private int _flingPowerMod = 0;
 
     private bool _dashUsed = false;
     public bool _dashAvailable = true;
@@ -88,6 +87,57 @@ public class HandMovement : MonoBehaviour {
 
         _dashUsed = false;
     }
+        
+    private void FlingTopping ()
+    {
+        if(PizzaManager.SharedInstance.currentPizzaObject)
+        {
+            PizzaToppingUnifier NewTopping = ObjectPooler.SharedInstance.GetTopping(_playerRef.ActiveTopping);
+            if (NewTopping != null)
+            {
+                float mod = GetFlingPower();
+
+                Vector3 target = PizzaManager.SharedInstance.currentPizzaObject.GetComponentInChildren<MeshCollider>().bounds.center - _playerRef.transform.position ;
+                Vector3 spawnPos = gameObject.transform.position + Random.onUnitSphere * 0.6f;
+                NewTopping.transform.position = spawnPos;
+                NewTopping.gameObject.SetActive(true);
+                NewTopping.Rigidbody.AddForce(target.normalized * mod, ForceMode.VelocityChange);
+
+                IncreaseFlingPower();
+            }
+        }
+    }
+
+    private void IncreaseFlingPower ()
+    {
+        _flingPowerMod++;
+
+        if (_flingPowerMod > Constants.PIZZA_FLING_MAX)
+            _flingPowerMod = Constants.PIZZA_FLING_MIN;
+
+        if (_flingPowerMod < Constants.PIZZA_FLING_MIN)
+            _flingPowerMod = Constants.PIZZA_FLING_MAX;        
+    }
+
+    private float GetFlingPower ()
+    {
+        if (PizzaManager.SharedInstance.TheOrder != null)
+        {
+            switch (PizzaManager.SharedInstance.TheOrder.PizzaOrderSize)
+            {
+                case Constants.PizzaSizes.small:
+                    return Constants.SMALL_PIZZA_FLING_VALUES[_flingPowerMod];
+                case Constants.PizzaSizes.medium:
+                    return Constants.MEDIUM_PIZZA_FLING_VALUES[_flingPowerMod];
+                case Constants.PizzaSizes.large:
+                    return Constants.LARGE_PIZZA_FLING_VALUES[_flingPowerMod];
+                default:
+                    return Constants.SMALL_PIZZA_FLING_VALUES[_flingPowerMod];
+            }
+        }
+
+        return Constants.SMALL_PIZZA_FLING_VALUES[_flingPowerMod];
+    }
 	
 	// Update is called once per frame
 	void Update () 
@@ -150,21 +200,8 @@ public class HandMovement : MonoBehaviour {
                 else
                 {
                     _playerRef.PlayAnimation(Constants.ANIMATION_PLAYER_THROW);
-
-                    //action
                     //firetoppings
-                    PizzaToppingUnifier NewTopping = ObjectPooler.SharedInstance.GetTopping(_playerRef.ActiveTopping);
-                    if (NewTopping != null)
-                    {
-                        {
-                            Vector3 target = _playerRef.transform.position + _tableRef.transform.position;
-                            Vector3 spawnPos = gameObject.transform.position + Random.onUnitSphere * 0.6f;
-                            NewTopping.transform.position = spawnPos;
-                            NewTopping.gameObject.SetActive(true);
-                            NewTopping.Rigidbody.AddForce(target.normalized * Random.Range(minForce, maxForce), ForceMode.VelocityChange);
-                        }
-
-                    }
+                    FlingTopping();
                 }
             }
  

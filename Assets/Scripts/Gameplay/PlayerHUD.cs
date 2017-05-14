@@ -16,8 +16,6 @@ public class PlayerHUD : MonoBehaviour {
     private CanvasGroup _canvasGroup;
 
     private int _currentTopping = 0;
-    private int _minTopping = 0;
-    private int _maxTopping = 4;
 
     private bool _ovenReady = false;
     public bool OvenReady { get { return _ovenReady; } }
@@ -30,12 +28,6 @@ public class PlayerHUD : MonoBehaviour {
     private void SetupVariables ()
     {
         _canvasGroup = this.GetComponent<CanvasGroup>();
-
-        #if DOUGH_PULLING_BROKEN
-        _minTopping = 1;
-
-        //TODO disable dough
-        #endif
     }
 
     public void Init ()
@@ -116,12 +108,5 @@ public class PlayerHUD : MonoBehaviour {
 
         string temp = (_ovenReady == true) ? Constants.HUD_OVEN_READY : Constants.HUD_OVEN_PREPPING_PIZZA;
         _ovenReadyText.text = temp;
-    }
-
-    private void RemoveDoughTopping ()
-    {
-        #if DOUGH_PULLING_BROKEN
-
-        #endif
     }
 }
