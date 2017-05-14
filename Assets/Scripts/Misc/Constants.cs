@@ -7,6 +7,10 @@ public static class Constants : object {
     //ENUMS
     public enum Toppings {dough = 0, sauce = 1, cheese = 2, pepperoni = 3, bacon = 4, anchovies = 5, greenPepper = 6,
         mushroom = 7, hotPepper = 8, pineapple = 9, spinach = 10}
+    public enum PlayerToppings
+    {
+        pepperoni = 3, bacon = 4, anchovies = 5, greenPepper = 6, mushroom = 7, hotPepper = 8, pineapple = 9, spinach = 10
+    }
     public enum PizzaSizes { tooSmall = 0, small, medium, large, tooLarge}
     public enum Characters {meowzzarella = 0, octopie = 1, crustodile = 2, bonemando = 3}
     public enum GameState {menu = 0, starting = 1, game = 2, end = 3}
@@ -28,6 +32,18 @@ public static class Constants : object {
     public static Vector3 SMALL_PIZZA_SCALE = new Vector3(2.5f, 1f, 2.5f);
     public static Vector3 MEDIUM_PIZZA_SCALE = new Vector3(4f, 1f, 4f);
     public static Vector3 LARGE_PIZZA_SCALE = new Vector3(5f, 1f, 5f);
+
+    public static int DEFAULT_CHEESE_AMOUNT = 20;
+    public static int DEFAULT_SAUCE_AMOUNT = 5;
+    public static int DEFAULT_TOPPING_AMOUNT = 6;
+
+    public static int LIGHT_TOPPING_MODIFIER = 1;
+    public static int REGULAR_TOPPING_MODIFIER = 2;
+    public static int EXTRA_TOPPING_MODIFIER = 3;
+
+    public static int SMALL_TOPPING_MODIFIER = 1;
+    public static int MEDIUM_TOPPING_MODIFIER = 3;
+    public static int LARGE_TOPPING_MODIFIER = 5;
 
     //controls
     public static float CONTROLLER_TRIGGER_DEAD_ZONE = 0.5f;

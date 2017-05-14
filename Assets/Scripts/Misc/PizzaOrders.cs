@@ -11,70 +11,43 @@ public class PizzaOrders : MonoBehaviour {
     PizzaClass CustomersPizza;
     int PizzaScore = 100;
 
+    int minimumToppings, maximumToppings;
+
     int minSpecialOrder = 0;
     int maxSpecialOrder = 8;
 
     bool NoSauce = true;
     ToppingAmounts SauceAmount = ToppingAmounts.regular;
-    Vector2 LightSauce = new Vector2(15f, 40f);
-    Vector2 MediumSauce = new Vector2(40f, 90f);
-    Vector2 ExtraSauce = new Vector2(90f, 150f);
 
     bool NoCheese = true;
     ToppingAmounts CheeseAmount = ToppingAmounts.regular;
-    Vector2 LightCheese = new Vector2(30f, 60f);
-    Vector2 MediumCheese = new Vector2(60f, 90f);
-    Vector2 ExtraCheese = new Vector2(90f, 150f);
 
     bool NoPepperoni = true;
     ToppingAmounts PepperoniAmount = ToppingAmounts.regular;
-    Vector2 LightPepperoni = new Vector2(5f, 10f);
-    Vector2 MediumPepperoni = new Vector2(10f, 20f);
-    Vector2 ExtraPepperoni = new Vector2(20f, 50f);
 
     bool NoBacon = true;
     ToppingAmounts BaconAmount = ToppingAmounts.regular;
-    Vector2 LightBacon = new Vector2(5f, 10f);
-    Vector2 MediumBacon = new Vector2(10f, 15f);
-    Vector2 ExtraBacon = new Vector2(15f, 20f);
 
     bool NoAnchovies = true;
     ToppingAmounts AnchoviesAmount = ToppingAmounts.regular;
-    Vector2 LightAnchovies = new Vector2(5f, 10f);
-    Vector2 MediumAnchovies = new Vector2(10f, 15f);
-    Vector2 ExtraAnchovies = new Vector2(15f, 20f);
 
     bool NoGreenPepper = true;
     ToppingAmounts GreenPepperAmount = ToppingAmounts.regular;
-    Vector2 LightGreenPepper = new Vector2(5f, 10f);
-    Vector2 MediumGreenPepper = new Vector2(10f, 15f);
-    Vector2 ExtraGreenPepper = new Vector2(15f, 20f);
 
     bool NoMushroom = true;
     ToppingAmounts MushroomAmount = ToppingAmounts.regular;
-    Vector2 LightMushroom = new Vector2(5f, 10f);
-    Vector2 MediumMushroom = new Vector2(10f, 15f);
-    Vector2 ExtraMushroom = new Vector2(15f, 20f);
 
     bool NoHotPepper = true;
     ToppingAmounts HotPepperAmount = ToppingAmounts.regular;
-    Vector2 LightHotPepper = new Vector2(5f, 10f);
-    Vector2 MediumHotPepper = new Vector2(10f, 15f);
-    Vector2 ExtraHotPepper = new Vector2(15f, 20f);
 
     bool NoPineapple = true;
     ToppingAmounts PineappleAmount = ToppingAmounts.regular;
-    Vector2 LightPineapple = new Vector2(5f, 10f);
-    Vector2 MediumPineapple = new Vector2(10f, 15f);
-    Vector2 ExtraPineapple = new Vector2(15f, 20f);
 
     bool NoSpinach = true;
     ToppingAmounts SpinachAmount = ToppingAmounts.regular;
-    Vector2 LightSpinach = new Vector2(5f, 10f);
-    Vector2 MediumSpinach = new Vector2(10f, 15f);
-    Vector2 ExtraSpinach = new Vector2(15f, 20f);
 
-    int toppingToCheck;
+    Constants.Toppings toppingToCheck;
+    int NumberOfTopping = 0;
 
     // Use this for initialization
     void Start () {
@@ -162,21 +135,24 @@ public class PizzaOrders : MonoBehaviour {
             }
         }
 
-        int NumberOfToppings = Random.Range(1, 9);
+        Debug.LogWarning("start toppings");
+        int NumberOfToppings = Random.Range(0, 9);
         //int[] ToppingsOrder = new int[NumberOfToppings];
-        List<int> RandomToppings = new List<int>();
+        List<Constants.PlayerToppings> RandomToppings = new List<Constants.PlayerToppings>();
         List<int> ToppingsList = new List<int>();
 
-        for (int x = 0; x < 8; x++)
+        for (int x = 3; x < 11; x++)
         {
             ToppingsList.Add(x);
         }
+
 
         //randomize the toppings here
         for (int x = 0; x < 8; x++)
         {
             int number = Random.Range(0, ToppingsList.Count);
-            RandomToppings.Add(ToppingsList[number]);
+            RandomToppings.Add((Constants.PlayerToppings)ToppingsList[number]);
+            Debug.LogError("Stored: " +RandomToppings[x].ToString());
             ToppingsList.RemoveAt(number);
             //Debug.LogError("Post Removal: " + ToppingsList[number]);
         }
@@ -194,7 +170,7 @@ public class PizzaOrders : MonoBehaviour {
 
         for (int x = 0; x < NumberOfToppings; x++)
         {
-            if( RandomToppings[x] == 0 )
+            if( RandomToppings[x] == Constants.PlayerToppings.pepperoni )
             {
                 //do pepperoni
                 NoPepperoni = false;
@@ -217,7 +193,7 @@ public class PizzaOrders : MonoBehaviour {
                     MenuManager.Instance.HUD.HandleNewPizza(Constants.Toppings.pepperoni, 2);
                 }
             }
-            else if (RandomToppings[x] == 1)
+            else if (RandomToppings[x] == Constants.PlayerToppings.bacon)
             {
                 //do bacon
                 NoBacon = false;
@@ -240,7 +216,7 @@ public class PizzaOrders : MonoBehaviour {
                     MenuManager.Instance.HUD.HandleNewPizza(Constants.Toppings.bacon, 2);
                 }
             }
-            else if (RandomToppings[x] == 2)
+            else if (RandomToppings[x] == Constants.PlayerToppings.anchovies)
             {
                 //do anchovies
                 NoAnchovies = false;
@@ -263,7 +239,7 @@ public class PizzaOrders : MonoBehaviour {
                     MenuManager.Instance.HUD.HandleNewPizza(Constants.Toppings.anchovies, 2);
                 }
             }
-            else if (RandomToppings[x] == 3)
+            else if (RandomToppings[x] == Constants.PlayerToppings.greenPepper)
             {
                 //do greenpepper
                 NoGreenPepper = false;
@@ -286,7 +262,7 @@ public class PizzaOrders : MonoBehaviour {
                     MenuManager.Instance.HUD.HandleNewPizza(Constants.Toppings.greenPepper, 2);
                 }
             }
-            else if (RandomToppings[x] == 4)
+            else if (RandomToppings[x] == Constants.PlayerToppings.mushroom)
             {
                 //do mushroom
                 NoMushroom = false;
@@ -309,7 +285,7 @@ public class PizzaOrders : MonoBehaviour {
                     MenuManager.Instance.HUD.HandleNewPizza(Constants.Toppings.mushroom, 2);
                 }
             }
-            else if (RandomToppings[x] == 5)
+            else if (RandomToppings[x] == Constants.PlayerToppings.hotPepper)
             {
                 //do hotppepper
                 NoHotPepper = false;
@@ -332,7 +308,7 @@ public class PizzaOrders : MonoBehaviour {
                     MenuManager.Instance.HUD.HandleNewPizza(Constants.Toppings.hotPepper, 2);
                 }
             }
-            else if (RandomToppings[x] == 6)
+            else if (RandomToppings[x] == Constants.PlayerToppings.pineapple)
             {
                 //do pineapple
                 NoPineapple = false;
@@ -355,7 +331,7 @@ public class PizzaOrders : MonoBehaviour {
                     MenuManager.Instance.HUD.HandleNewPizza(Constants.Toppings.pineapple, 2);
                 }
             }
-            else if (RandomToppings[x] == 7)
+            else if (RandomToppings[x] == Constants.PlayerToppings.spinach)
             {
                 //do spinach
                 NoSpinach = false;
@@ -380,7 +356,8 @@ public class PizzaOrders : MonoBehaviour {
             }
             else
             {
-                Debug.LogError("oops.");
+                Debug.Log("missing: " + RandomToppings[x].ToString());
+                Debug.LogError("oops. " + x);
             }
         }
         Debug.Log("Order ended.");
@@ -400,127 +377,132 @@ public class PizzaOrders : MonoBehaviour {
 
         //score sauce
         //Debug.LogWarning("Score sauce");
-        toppingToCheck = CustomersPizza.ReturnSauceAmount();
-        ScoreTopping(toppingToCheck, NoSauce, SauceAmount, LightSauce, MediumSauce, ExtraSauce);
+        NumberOfTopping = CustomersPizza.ReturnSauceAmount();
+        toppingToCheck = Constants.Toppings.sauce;
+        ScoreTopping(toppingToCheck, NumberOfTopping, NoSauce, SauceAmount, PizzaOrderSize );
         //score cheese
         //Debug.LogWarning("Score cheese");
-        toppingToCheck = CustomersPizza.ReturnCheeseAmount();
-        ScoreTopping(toppingToCheck, NoCheese, CheeseAmount, LightCheese, MediumCheese, ExtraCheese);
+        NumberOfTopping = CustomersPizza.ReturnCheeseAmount();
+        toppingToCheck = Constants.Toppings.cheese;
+        ScoreTopping(toppingToCheck, NumberOfTopping, NoCheese, CheeseAmount, PizzaOrderSize);
         //score pepperoni
         //Debug.LogWarning("Score pepperoni");
-        toppingToCheck = CustomersPizza.ReturnPepperoniAmount();
-        ScoreTopping(toppingToCheck, NoPepperoni, PepperoniAmount, LightPepperoni, MediumPepperoni, ExtraPepperoni);
+        NumberOfTopping = CustomersPizza.ReturnPepperoniAmount();
+        toppingToCheck = Constants.Toppings.pepperoni;
+        ScoreTopping(toppingToCheck, NumberOfTopping, NoPepperoni, PepperoniAmount, PizzaOrderSize);
         //score bacon
         //Debug.LogWarning("Score bacon");
-        toppingToCheck = CustomersPizza.ReturnBaconAmount();
-        ScoreTopping(toppingToCheck, NoBacon, BaconAmount, LightBacon, MediumBacon, ExtraBacon);
+        NumberOfTopping = CustomersPizza.ReturnBaconAmount();
+        toppingToCheck = Constants.Toppings.bacon;
+        ScoreTopping(toppingToCheck, NumberOfTopping, NoBacon, BaconAmount, PizzaOrderSize);
         //score anchovies
         //Debug.LogWarning("Score anchovies");
-        toppingToCheck = CustomersPizza.ReturnAnchoviesAmount();
-        ScoreTopping(toppingToCheck, NoAnchovies, AnchoviesAmount, LightAnchovies, MediumAnchovies, ExtraAnchovies);
+        NumberOfTopping = CustomersPizza.ReturnAnchoviesAmount();
+        toppingToCheck = Constants.Toppings.anchovies;
+        ScoreTopping(toppingToCheck, NumberOfTopping, NoAnchovies, AnchoviesAmount, PizzaOrderSize);
         //score green pepper
         //Debug.LogWarning("Score greenpepper");
-        toppingToCheck = CustomersPizza.ReturnGreenPepperAmount();
-        ScoreTopping(toppingToCheck, NoGreenPepper, GreenPepperAmount, LightGreenPepper, MediumGreenPepper, ExtraGreenPepper);
+        NumberOfTopping = CustomersPizza.ReturnGreenPepperAmount();
+        toppingToCheck = Constants.Toppings.greenPepper;
+        ScoreTopping(toppingToCheck, NumberOfTopping, NoGreenPepper, GreenPepperAmount, PizzaOrderSize);
         //score mushroom
         //Debug.LogWarning("Score mushroom");
-        toppingToCheck = CustomersPizza.ReturnMushroomAmount();
-        ScoreTopping(toppingToCheck, NoMushroom, MushroomAmount, LightMushroom, MediumMushroom, ExtraMushroom);
+        NumberOfTopping = CustomersPizza.ReturnMushroomAmount();
+        toppingToCheck = Constants.Toppings.mushroom;
+        ScoreTopping(toppingToCheck, NumberOfTopping, NoMushroom, MushroomAmount, PizzaOrderSize);
         //score hot pepper
         //Debug.LogWarning("Score hotpepper");
-        toppingToCheck = CustomersPizza.ReturnHotPepperAmount();
-        ScoreTopping(toppingToCheck, NoHotPepper, HotPepperAmount, LightHotPepper, MediumHotPepper, ExtraHotPepper);
+        NumberOfTopping = CustomersPizza.ReturnHotPepperAmount();
+        toppingToCheck = Constants.Toppings.hotPepper;
+        ScoreTopping(toppingToCheck, NumberOfTopping, NoHotPepper, HotPepperAmount, PizzaOrderSize);
         //score pineapple
         //Debug.LogWarning("Score pineapple");
-        toppingToCheck = CustomersPizza.ReturnPineappleAmount();
-        ScoreTopping(toppingToCheck, NoPineapple, PineappleAmount, LightPineapple, MediumPineapple, ExtraPineapple);
+        NumberOfTopping = CustomersPizza.ReturnPineappleAmount();
+        toppingToCheck = Constants.Toppings.pineapple;
+        ScoreTopping(toppingToCheck, NumberOfTopping, NoPineapple, PineappleAmount, PizzaOrderSize);
         //score spinach
         //Debug.LogWarning("Score spinach");
-        toppingToCheck = CustomersPizza.ReturnSpinachAmount();
-        ScoreTopping(toppingToCheck, NoSpinach, SpinachAmount, LightSpinach, MediumSpinach, ExtraSpinach);
+        NumberOfTopping = CustomersPizza.ReturnSpinachAmount();
+        toppingToCheck = Constants.Toppings.spinach;
+        ScoreTopping(toppingToCheck, NumberOfTopping, NoSpinach, SpinachAmount, PizzaOrderSize);
 
         //Debug.LogError("Pizza Score: " + PizzaScore);
         return Mathf.Clamp(PizzaScore, 0, 100);
     }
 
-    void ScoreTopping (int topp, bool isNotRequested, ToppingAmounts toppAmount, Vector2 lightTopps, Vector2 regularTopps, Vector2 extraTopps)
+    void ScoreTopping (Constants.Toppings toppingType, int numberOftoppingsOnPizza, bool isNotRequested, ToppingAmounts toppAmount, Constants.PizzaSizes pizzasize )//, Vector2 lightTopps, Vector2 regularTopps, Vector2 extraTopps)
     {
-        
+        int toppingSizeModifier = Constants.SMALL_TOPPING_MODIFIER;
+        int toppingSizeModifierMax = toppingSizeModifier + 1;
 
-        if (!isNotRequested)
+        if( pizzasize == Constants.PizzaSizes.medium )
+        {
+            toppingSizeModifier = Constants.MEDIUM_TOPPING_MODIFIER;
+            toppingSizeModifierMax = toppingSizeModifier + 1;
+
+        }
+        else if( pizzasize == Constants.PizzaSizes.large )
+        {
+            toppingSizeModifier = Constants.LARGE_TOPPING_MODIFIER;
+            toppingSizeModifierMax = toppingSizeModifier + 1;
+        }
+
+        int toppingExtraModifier = Constants.LIGHT_TOPPING_MODIFIER;
+
+        if (toppAmount == ToppingAmounts.regular)
+        {
+            toppingExtraModifier = Constants.REGULAR_TOPPING_MODIFIER;
+        }
+        else if (toppAmount == ToppingAmounts.extra)
+        {
+            toppingExtraModifier = Constants.EXTRA_TOPPING_MODIFIER;
+        }
+
+
+
+        if (toppingType == Constants.Toppings.sauce)
+        {
+            minimumToppings = Constants.DEFAULT_SAUCE_AMOUNT * toppingSizeModifier * toppingExtraModifier;
+            maximumToppings = Constants.DEFAULT_SAUCE_AMOUNT * toppingSizeModifierMax * toppingExtraModifier;
+        }
+        else if(toppingType == Constants.Toppings.cheese )
+        {
+            minimumToppings = Constants.DEFAULT_CHEESE_AMOUNT * toppingSizeModifier * toppingExtraModifier;
+            maximumToppings = Constants.DEFAULT_CHEESE_AMOUNT * toppingSizeModifierMax * toppingExtraModifier;
+        }
+        else
+        {
+            minimumToppings = Constants.DEFAULT_TOPPING_AMOUNT * toppingSizeModifier * toppingExtraModifier;
+            maximumToppings = Constants.DEFAULT_TOPPING_AMOUNT * toppingSizeModifierMax * toppingExtraModifier;
+        }
+        Debug.Log("Topping: " + toppingType);
+        Debug.Log("minimum toppings: " + minimumToppings);
+        Debug.Log("maximum toppings: " + maximumToppings);
+
+
+        if (!isNotRequested)//if requested
         {
             
-            Debug.Log("Number on pizza of current topping: " + topp);
-            if (toppAmount == ToppingAmounts.light)
+            Debug.Log("Number on pizza of " + toppingType + " :" + numberOftoppingsOnPizza);
+            if( numberOftoppingsOnPizza > minimumToppings && numberOftoppingsOnPizza < maximumToppings )
             {
-                Debug.Log("Entered light");
-                if (topp > lightTopps.x && topp < lightTopps.y)
-                {
-                    //dont deduct points
-                    Debug.LogWarning("Score 1");
-                }
-                else if (topp < lightTopps.x)
-                {
-                    //PizzaScore -= Mathf.Abs((topp - lightTopps.x));
-                    DeductScore(10);
-                    Debug.LogWarning("Score 2");
-                }
-                else if (topp > lightTopps.y)
-                {
-                    //PizzaScore -= Mathf.Abs(lightTopps.y - topp) * 2;
-                    DeductScore(20);
-                    Debug.LogWarning("Score 3");
-                }
+                //dont deduct points
             }
-            else if (toppAmount == ToppingAmounts.regular)
+            else if( numberOftoppingsOnPizza < minimumToppings )
             {
-                Debug.Log("Entered regular");
-                if (topp > regularTopps.x && topp < regularTopps.y)
-                {
-                    //dont deduct points
-                    Debug.LogWarning("Score 4");
-                }
-                else if (topp < regularTopps.x)
-                {
-                    //PizzaScore -= Mathf.Abs((topp - regularTopps.x));
-                    DeductScore(10);
-                    Debug.LogWarning("Score 5");
-                }
-                else if (topp > regularTopps.y)
-                {
-                    //PizzaScore -= Mathf.Abs(regularTopps.y - topp) * 2;
-                    DeductScore(20);
-                    Debug.LogWarning("Score 6");
-                }
+                DeductScore(10);
             }
-            else if (toppAmount == ToppingAmounts.extra)
+            else if( numberOftoppingsOnPizza > maximumToppings )
             {
-                Debug.Log("Entered extra");
-                if (topp > extraTopps.x && topp < extraTopps.y)
-                {
-                    //dont deduct points
-                    Debug.LogWarning("Score 7");
-                }
-                else if (topp < extraTopps.x)
-                {
-                    //PizzaScore -= Mathf.Abs((topp - extraTopps.x));
-                    DeductScore(5);
-                    Debug.LogWarning("Score 8");
-                }
-                else if (topp > extraTopps.y)
-                {
-                    //PizzaScore -= Mathf.Abs(extraTopps.y - topp) * 2;
-                    DeductScore(10);
-                    Debug.LogWarning("Score 9");
-                }
+                DeductScore(10);
             }
         }
         else if (isNotRequested)
         {
             Debug.Log("Entered not requested");
-            if (topp > 0)
+            if (numberOftoppingsOnPizza > 0)
             {
-                DeductScore(20);
+                DeductScore(15);
                 Debug.LogWarning("I SAID NO");
             }
         }
@@ -528,6 +510,6 @@ public class PizzaOrders : MonoBehaviour {
 
     void DeductScore (int points)
     {
-        PizzaScore -= points;
+        PizzaScore -= Mathf.Abs( points);
     }
 }
