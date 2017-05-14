@@ -78,6 +78,7 @@ public static class Constants : object {
     //menu
     public const string MENU_READY_PLAYERS = "Waiting For Players To Ready...";
     public const string MENU_GAME_STARTING = "Game Starting in ";
+    public const string MENU_GAME_RESET = "To Reset)";
 
     //hud
     public const string HUD_OVEN_PREPPING_PIZZA = "Prepping";

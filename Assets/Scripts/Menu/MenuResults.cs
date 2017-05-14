@@ -11,10 +11,12 @@ public class MenuResults : MonoBehaviour {
     [SerializeField] private TextMeshProUGUI _bestPizza;
     [SerializeField] private TextMeshProUGUI _worstPizza;
     [SerializeField] private TextMeshProUGUI _ranking;
+    [SerializeField] private TextMeshProUGUI _pressesToReset;
 
     private const string _qualitySuffix = "%";
     private const string _rankingSuffixGood = "+";
     private const string _rankingSuffixBad = "-";
+    private const string _resetPrefix = "(";
 
     private string _controlsOne;
     private string _controlsTwo;
@@ -76,6 +78,9 @@ public class MenuResults : MonoBehaviour {
             Input.GetButtonDown(_controlsFour))
             {
                 _restartCount++;
+
+                if (_pressesToReset != null)
+                    _pressesToReset.text = _resetPrefix + (_restartCountMax - _restartCount).ToString("00");
 
                 if (_restartCount >= _restartCountMax)
                     UnityEngine.SceneManagement.SceneManager.LoadScene("main");
