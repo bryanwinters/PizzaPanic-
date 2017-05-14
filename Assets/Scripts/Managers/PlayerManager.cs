@@ -135,14 +135,14 @@ public class PlayerManager : MonoBehaviour, IManager {
 
     private void HandleOvenReady (bool isReady)
     {
-//        if (GameManager.Instance.GameState == Constants.GameState.game)
-//        {
-//            int temp = (isReady == true) ? 1 : -1;
-//            _pizzasReady = Mathf.Clamp(_pizzasReady + temp, 0, _activePlayers.Count); 
-//
-//            if (_pizzasReady == _activePlayers.Count)
-//                SendPizzaSentEvent();
-//        }
+        if (GameManager.Instance.GameState == Constants.GameState.game)
+        {
+            int temp = (isReady == true) ? 1 : -1;
+            _pizzasReady = Mathf.Clamp(_pizzasReady + temp, 0, _activePlayers.Count); 
+
+            if (_pizzasReady == _activePlayers.Count)
+                SendPizzaSentEvent();
+        }
     }
 
     private void SendReadyEvent ()
@@ -190,7 +190,7 @@ public class PlayerManager : MonoBehaviour, IManager {
                 Player p = Instantiate(prefab) as Player;
                 p.Init();
                 p.HandController.SetToPosition(Constants.SPAWN_POSITION[p.PlayerNumber - 1]);
-                //p.OnOvenReady += HandleOvenReady;
+                p.OnOvenReady += HandleOvenReady;
                 _activePlayers.Add(p);
             }
             else
