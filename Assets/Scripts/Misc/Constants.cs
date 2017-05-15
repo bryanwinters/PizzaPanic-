@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public static class Constants : object {
+public static class Constants  {
 
     //ENUMS
     public enum Toppings {dough = 0, sauce = 1, cheese = 2, pepperoni = 3, bacon = 4, anchovies = 5, greenPepper = 6,
@@ -13,7 +13,7 @@ public static class Constants : object {
     }
     public enum PizzaSizes { tooSmall = 0, small, medium, large, tooLarge}
     public enum Characters {meowzzarella = 0, octopie = 1, crustodile = 2, bonemando = 3}
-    public enum GameState {menu = 0, starting = 1, game = 2, end = 3}
+    public enum GameState {menu = 0, starting = 1, game = 2, end = 3, cancelStart = 4, howTo = 5}
 
     //NUMBERS
     //settings
@@ -45,6 +45,13 @@ public static class Constants : object {
     public static int MEDIUM_TOPPING_MODIFIER = 3;
     public static int LARGE_TOPPING_MODIFIER = 5;
 
+    public static int PIZZA_FLING_MIN = 0;
+    public static int PIZZA_FLING_MAX = 4;
+
+    public static float[] SMALL_PIZZA_FLING_VALUES = new float[]{8f,11f,14f,17f,22f};
+    public static float[] MEDIUM_PIZZA_FLING_VALUES = new float[]{2f,6.5f,11f,15.5f,22f};
+    public static float[] LARGE_PIZZA_FLING_VALUES = new float[]{-10f,-2.5f,5f,12.5f,22f};
+
     //controls
     public static float CONTROLLER_TRIGGER_DEAD_ZONE = 0.5f;
 
@@ -68,6 +75,7 @@ public static class Constants : object {
     public const string CONTROLS_CYCLE_RIGHT = "CycleRight";
     public const string CONTROLS_CYCLE_LEFT = "CycleLeft";
     public const string CONTROLS_OVEN_X = "OvenX";
+    public const string CONTROLS_CANCEL = "Cancel";
 
     //animation
     public const string ANIMATION_PLAYER_IDLE = "Idle";
@@ -77,6 +85,7 @@ public static class Constants : object {
     //menu
     public const string MENU_READY_PLAYERS = "Waiting For Players To Ready...";
     public const string MENU_GAME_STARTING = "Game Starting in ";
+    public const string MENU_GAME_RESET = "To Reset)";
 
     //hud
     public const string HUD_OVEN_PREPPING_PIZZA = "Prepping";

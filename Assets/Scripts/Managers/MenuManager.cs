@@ -15,7 +15,7 @@ public class ToppingIcon
 public class MenuManager : MonoBehaviour, IManager {
 
     public List<ToppingIcon> Toppings = new List<ToppingIcon>();
-    public List<Constants.Toppings> AvailableToppingsForPlayers = new List<Constants.Toppings>();
+    public List<Constants.PlayerToppings> AvailableToppingsForPlayers = new List<Constants.PlayerToppings>();
     public MenuHUD HUD;
 
     private static MenuManager _instance;
@@ -66,6 +66,10 @@ public class MenuManager : MonoBehaviour, IManager {
         {
 
         }
+        else if (state == Constants.GameState.cancelStart)
+        {
+            _playersToppingPool = new List<ToppingIcon>(Toppings);
+        }
     }
 
     public void Init()
@@ -81,7 +85,8 @@ public class MenuManager : MonoBehaviour, IManager {
         ToppingIcon t = _playersToppingPool[ran];
         _playersToppingPool.Remove(t);
 
-        AvailableToppingsForPlayers.Add(t.Topping);
+        int temp = (int)t.Topping;
+        AvailableToppingsForPlayers.Add((Constants.PlayerToppings)temp);
 
         return t;
     }

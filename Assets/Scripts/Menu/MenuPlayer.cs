@@ -8,6 +8,8 @@ public class MenuPlayer : MonoBehaviour {
 
     public System.Action<bool> OnPlayerReady;
     public System.Action<int, bool> OnPlayerActive;
+    public System.Action OnPlayerCancelled;
+    public System.Action OnPlayerHowTo;
 
     public int PlayerNumber = 1;
 
@@ -21,6 +23,8 @@ public class MenuPlayer : MonoBehaviour {
     private bool _isReady = false;
     private string _controlsSelect;
     private string _controlsReady;
+    private string _controlsCancel;
+    private string _controlsHowTo;
 
     private void Awake ()
     {
@@ -33,6 +37,8 @@ public class MenuPlayer : MonoBehaviour {
 
         _controlsSelect = Constants.CONTROLS_ACTION + PlayerNumber.ToString();
         _controlsReady = Constants.CONTROLS_DASH + PlayerNumber.ToString();
+        _controlsCancel = Constants.CONTROLS_CANCEL + PlayerNumber.ToString();
+        _controlsHowTo = Constants.CONTROLS_OVEN_X + PlayerNumber.ToString();
     }
 
     private void Update()
@@ -40,15 +46,23 @@ public class MenuPlayer : MonoBehaviour {
         if (GameManager.Instance.GameState == Constants.GameState.menu)
         {
             if (Input.GetButtonDown(_controlsSelect))
-            {
                 SetPlayerActive(!_isActive);
-            }
 
-            if ((Input.GetAxis(_controlsReady) >= Constants.CONTROLLER_TRIGGER_DEAD_ZONE || 
+            if (Input.GetButtonDown(_controlsHowTo))
+                SendHowToEvent();
+
+            if ((Input.GetAxis(_controlsReady) >= Constants.CONTROLLER_TRIGGER_DEAD_ZONE ||
                 Input.GetAxis(_controlsReady) <= -Constants.CONTROLLER_TRIGGER_DEAD_ZONE) && _isActive == true)
                 SetPlayerReady(true);
             else
                 SetPlayerReady(false);
+        }
+        else if(GameManager.Instance.GameState == Constants.GameState.starting || 
+            GameManager.Instance.GameState == Constants.GameState.howTo)
+        {
+            //cancel ready
+            if (Input.GetButtonDown(_controlsCancel))
+                SendPlayerCancelEvent();
         }
     }
 
@@ -56,6 +70,18 @@ public class MenuPlayer : MonoBehaviour {
     {
         if (OnPlayerActive != null)
             OnPlayerActive(PlayerNumber, _isActive);
+    }
+
+    private void SendHowToEvent ()
+    {
+        if (OnPlayerHowTo != null)
+            OnPlayerHowTo();
+    }
+
+    private void SendPlayerCancelEvent ()
+    {
+        if (OnPlayerCancelled != null)
+            OnPlayerCancelled();
     }
 
     private void SendPlayerReadyEvent ()

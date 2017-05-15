@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 using TMPro;
+using DG.Tweening;
 
 public class PlayerHUD : MonoBehaviour {
 
@@ -39,7 +40,30 @@ public class PlayerHUD : MonoBehaviour {
             _toppingsList[i].IconSprite = t.IconSprite;
             _toppingsList[i].Topping = t.Topping;
             _toppingsList[i].IconImage.sprite = t.IconSprite;
-        }       
+        }  
+
+        #if DOUGH_PULLING_BROKEN
+        float shift = 20f; //{80,60,20}
+        float shiftMod = 5f;
+
+        //hide dough and remove from topping cycle
+        foreach(ToppingIcon t in temp)
+        {
+            if(t.Topping == Constants.Toppings.dough)
+            {
+                t.IconImage.gameObject.SetActive(false);
+                _toppingsList.Remove(t);
+            }                
+        }
+
+        //reposition icons
+        for (int i = 0; i < _toppingsList.Count; i++)
+        {
+            float startVal = _toppingsList[i].IconImage.rectTransform.position.x;
+            float mod = Mathf.Max((shift - (shiftMod*i)), 0f);
+            _toppingsList[i].IconImage.rectTransform.DOMoveX(startVal - mod, 0f);
+        } 
+        #endif
     }
 
     public Constants.Toppings CycleToppings (int dir)
@@ -54,6 +78,23 @@ public class PlayerHUD : MonoBehaviour {
 
         _activeTopping.transform.position = _toppingsList[_currentTopping].IconImage.transform.position;
         return _toppingsList[_currentTopping].Topping;
+    }
+
+    public Constants.Toppings SetTopping (Constants.Toppings topping)
+    {
+        //assign that topping
+        foreach (ToppingIcon t in _toppingsList)
+        {
+            if (t.Topping == topping)
+            {
+                _activeTopping.transform.position = t.IconImage.transform.position;
+                return t.Topping;
+            }
+        }
+
+        //else assign first topping
+        _activeTopping.transform.position = _toppingsList[0].IconImage.transform.position;
+        return _toppingsList[0].Topping;
     }
 
     public void EnableHud ()

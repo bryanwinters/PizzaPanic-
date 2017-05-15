@@ -8,6 +8,7 @@ using DG.Tweening;
 public class MainMenu : MonoBehaviour {
 
     [SerializeField] private TextMeshProUGUI _readyText;
+    [SerializeField] private GameObject _cancelText;
 
     private CanvasGroup _menu;
 
@@ -39,6 +40,13 @@ public class MainMenu : MonoBehaviour {
         if (state == Constants.GameState.starting)
         {
             StartCoroutine(StartMenuTimer());
+            _cancelText.SetActive(true);
+        }
+        else if (state == Constants.GameState.cancelStart)
+        {
+            StopAllCoroutines();
+            _readyText.text = Constants.MENU_READY_PLAYERS;
+            _cancelText.SetActive(false);
         }
     }
 

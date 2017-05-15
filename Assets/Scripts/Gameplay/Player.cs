@@ -19,11 +19,12 @@ public class Player : MonoBehaviour {
     private string _controlsCycleLeft;
     private string _controlsOven;
 
+    private bool _submitted = false;
+
     private Constants.Toppings _activeTopping = Constants.Toppings.dough;
     public Constants.Toppings ActiveTopping { get { return _activeTopping; } }
 
     private PlayerHUD _hudRef;
-
     private Animator _animator;
 
     private void Awake () 
@@ -59,6 +60,19 @@ public class Player : MonoBehaviour {
         _hudRef = MenuManager.Instance.GetHudForPlayer(CharacterType);
         if (_hudRef)
             _hudRef.Init();
+
+        StartCoroutine(DoughBroken());
+    }
+
+    private IEnumerator DoughBroken ()
+    {
+        yield return new WaitForEndOfFrame();
+        yield return new WaitForEndOfFrame();
+        yield return new WaitForEndOfFrame();
+
+        #if DOUGH_PULLING_BROKEN
+        SetSpecificTopping(Constants.Toppings.sauce);
+        #endif
     }
 
     // Update is called once per frame
@@ -78,9 +92,12 @@ public class Player : MonoBehaviour {
 
             if (Input.GetButtonDown(_controlsOven))
             {
-                bool temp = !_hudRef.OvenReady;
-                _hudRef.SetOvenState(temp);
-                SendOvenReadyEvent(temp);
+                if (_submitted == false)
+                {
+                    _submitted = true;//!_hudRef.OvenReady;
+                    _hudRef.SetOvenState(_submitted);
+                    SendOvenReadyEvent(_submitted);
+                }
             }
         }
     }
@@ -93,12 +110,18 @@ public class Player : MonoBehaviour {
 
     private void HandlePizzaSubmitted()
     {
-        _hudRef.SetOvenState(false);
+        _submitted = false;
+        _hudRef.SetOvenState(_submitted);
     }
 
     private void CycleToppings (int direction)
     {
         _activeTopping = _hudRef.CycleToppings(direction);
+    }
+
+    private void SetSpecificTopping (Constants.Toppings topping)
+    {
+        _activeTopping = _hudRef.SetTopping(topping);
     }
 
     public void PlayAnimation (string anim)

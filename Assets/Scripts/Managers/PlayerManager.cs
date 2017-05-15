@@ -9,6 +9,8 @@ using UnityEngine;
 public class PlayerManager : MonoBehaviour, IManager {
 
     public System.Action OnPlayersReady;
+    public System.Action OnPlayerCancelled;
+    public System.Action OnPlayerHowTo;
     public System.Action OnPizzaSubmitted;
 
     private static PlayerManager _instance;
@@ -59,6 +61,8 @@ public class PlayerManager : MonoBehaviour, IManager {
         {
             mp.OnPlayerActive += HandlePlayerActive;
             mp.OnPlayerReady += HandlePlayerReady;
+            mp.OnPlayerCancelled += HandlePlayerCancelled;
+            mp.OnPlayerHowTo += HandlePlayerHowTo;
         }
     }
 
@@ -70,6 +74,8 @@ public class PlayerManager : MonoBehaviour, IManager {
         {
             mp.OnPlayerActive -= HandlePlayerActive;
             mp.OnPlayerReady -= HandlePlayerReady;
+            mp.OnPlayerCancelled -= HandlePlayerCancelled;
+            mp.OnPlayerHowTo -= HandlePlayerHowTo;
         }
     }
 
@@ -83,6 +89,10 @@ public class PlayerManager : MonoBehaviour, IManager {
         if (state == Constants.GameState.starting)
         {
             SpawnPlayers();
+        }
+        else if (state == Constants.GameState.menu)
+        {
+            ClearPlayers();
         }
     }
 
@@ -113,6 +123,16 @@ public class PlayerManager : MonoBehaviour, IManager {
         }
     }
 
+    private void HandlePlayerCancelled ()
+    {
+        SendCancelEvent();
+    }
+
+    private void HandlePlayerHowTo ()
+    {
+        SendHowToEvent();
+    }
+
     private void HandleOvenReady (bool isReady)
     {
         if (GameManager.Instance.GameState == Constants.GameState.game)
@@ -129,6 +149,18 @@ public class PlayerManager : MonoBehaviour, IManager {
     {
         if (OnPlayersReady != null)
             OnPlayersReady();
+    }
+
+    private void SendCancelEvent ()
+    {
+        if (OnPlayerCancelled != null)
+            OnPlayerCancelled();
+    }
+
+    private void SendHowToEvent ()
+    {
+        if (OnPlayerHowTo != null)
+            OnPlayerHowTo();
     }
 
     private void SendPizzaSentEvent ()
@@ -164,6 +196,19 @@ public class PlayerManager : MonoBehaviour, IManager {
             else
                 Debug.LogWarning("*- NO PREFAB FOR THAT PLAYER -*");
         }
+    }
+
+    private void ClearPlayers ()
+    {
+        List<Player> temp = new List<Player>(_activePlayers);
+
+        foreach (Player p in temp)
+        {
+            _activePlayers.Remove(p);
+            DestroyObject(p.gameObject);
+        }
+
+        _activePlayers.Clear();
     }
 
     private void OnDestroy ()
