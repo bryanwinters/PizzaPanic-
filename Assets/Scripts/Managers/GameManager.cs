@@ -51,7 +51,7 @@ public class GameManager : MonoBehaviour {
     private void SetupVariables ()
     {
         //DontDestroyOnLoad(this);
-        _managers = this.GetComponents<IManager>().ToList();
+        _managers = this.GetComponentsInChildren<IManager>().ToList();
     }
 
     private void SetGameState (Constants.GameState state)

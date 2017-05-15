@@ -180,11 +180,20 @@ public class HandMovement : MonoBehaviour {
                 dashMod = _dashMod*Mathf.Abs(Input.GetAxis(_controlsDash));
             }
 
-            float rotAmount = horizontal * _speedMod * dashMod;
+            //MOVEMENT
+            if ((Input.GetAxis(_controlsHorizontal) >= Constants.CONTROLLER_TRIGGER_DEAD_ZONE ||
+                Input.GetAxis(_controlsHorizontal) <= -Constants.CONTROLLER_TRIGGER_DEAD_ZONE))
+            {
+                if (PizzaManager.SharedInstance.currentPizzaObject)
+                {
+                    float rotAmount = horizontal * _speedMod * dashMod;
 
-            //RELATIVE CONTROLS
-            //transform.RotateAround(_tableRef.transform.position, Vector3.down, horizontal * 2f);
-            StartCoroutine(RotateObject(_tableRef.transform.position, Vector3.down, rotAmount, _speed));
+                    //RELATIVE CONTROLS
+                    //transform.RotateAround(_tableRef.transform.position, Vector3.down, horizontal * 2f);
+                    StartCoroutine(RotateObject(PizzaManager.SharedInstance.currentPizzaObject.GetComponentInChildren<MeshCollider>().bounds.center,
+                        Vector3.down, rotAmount, _speed));
+                }
+            }
 
             //ACTION
             if (Input.GetButtonDown(_controlsAction))
